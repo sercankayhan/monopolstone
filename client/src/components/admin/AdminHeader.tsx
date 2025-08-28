@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
-import { Button } from '../ui';
 
 interface AdminHeaderProps {
   title: string;
@@ -18,10 +18,12 @@ const AdminHeader: React.FC<AdminHeaderProps> = ({
 }) => {
   const { user, logout } = useAuth();
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     setIsProfileDropdownOpen(false);
     logout();
+    navigate('/login');
   };
 
   const getSectionIcon = (title: string) => {

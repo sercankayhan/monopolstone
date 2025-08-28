@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '../ui';
+import { mockHeroImages } from '../../utils/mockImages';
 
 interface HeroSlide {
   id: number;
@@ -24,7 +25,7 @@ const HeroSection: React.FC = () => {
       title: 'Premium Artificial Stone',
       subtitle: 'Crafted for Perfection',
       description: 'Transform your spaces with our premium artificial stone solutions. Durable, elegant, and designed to last a lifetime.',
-      image: '/api/placeholder/1920/1080',
+      image: mockHeroImages[0],
       cta: {
         primary: 'Explore Products',
         secondary: 'Get Quote'
@@ -35,7 +36,7 @@ const HeroSection: React.FC = () => {
       title: 'Custom Design Solutions',
       subtitle: 'Tailored to Your Vision',
       description: 'Create unique architectural elements with our custom artificial stone designs. From concept to installation.',
-      image: '/api/placeholder/1920/1080',
+      image: mockHeroImages[1],
       cta: {
         primary: 'View Gallery',
         secondary: 'Contact Us'

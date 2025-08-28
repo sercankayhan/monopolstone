@@ -1,5 +1,4 @@
-import { useState, useEffect, useContext, createContext, ReactNode } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect, useContext, createContext, ReactNode } from 'react';
 
 interface User {
   id: string;
@@ -12,7 +11,6 @@ interface AuthContextType {
   user: User | null;
   login: (email: string, password: string) => Promise<void>;
   logout: () => void;
-  register: (name: string, email: string, password: string, role?: string) => Promise<void>;
   loading: boolean;
   error: string | null;
 }
@@ -36,52 +34,75 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+  // Mock users for demo
+  const mockUsers = [
+    {
+      id: '1',
+      email: 'admin@artificialstone.com',
+      password: 'admin123',
+      name: 'Admin User',
+      role: 'admin' as const,
+    },
+    {
+      id: '2',
+      email: 'editor@artificialstone.com',
+      password: 'editor123',
+      name: 'Editor User',
+      role: 'editor' as const,
+    },
+  ];
 
-  // Configure axios defaults
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-    }
-  }, []);
 
   // Check for existing token on mount
   useEffect(() => {
-    const checkAuth = async () => {
+    const checkAuth = () => {
       const token = localStorage.getItem('token');
-      if (token) {
+      const userData = localStorage.getItem('userData');
+      if (token && userData) {
         try {
-          const response = await axios.get(`${API_BASE_URL}/auth/me`);
-          setUser(response.data.data.user);
+          setUser(JSON.parse(userData));
         } catch (error) {
           localStorage.removeItem('token');
-          delete axios.defaults.headers.common['Authorization'];
+          localStorage.removeItem('userData');
         }
       }
       setLoading(false);
     };
 
     checkAuth();
-  }, [API_BASE_URL]);
+  }, []);
 
   const login = async (email: string, password: string) => {
     try {
       setLoading(true);
       setError(null);
       
-      const response = await axios.post(`${API_BASE_URL}/auth/login`, {
-        email,
-        password,
-      });
+      // Simulate API delay
+      await new Promise(resolve => setTimeout(resolve, 1000));
 
-      const { user: userData, token } = response.data.data;
+      // Find mock user
+      const mockUser = mockUsers.find(u => u.email === email && u.password === password);
       
-      localStorage.setItem('token', token);
-      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      if (!mockUser) {
+        throw new Error('Invalid email or password');
+      }
+
+      // Create user object without password
+      const userData = {
+        id: mockUser.id,
+        email: mockUser.email,
+        name: mockUser.name,
+        role: mockUser.role,
+      };
+
+      // Store auth data
+      const mockToken = `mock-jwt-token-${mockUser.id}`;
+      localStorage.setItem('token', mockToken);
+      localStorage.setItem('userData', JSON.stringify(userData));
+
       setUser(userData);
     } catch (error: any) {
-      const errorMessage = error.response?.data?.message || 'Login failed. Please try again.';
+      const errorMessage = error instanceof Error ? error.message : 'Login failed. Please try again.';
       setError(errorMessage);
       throw new Error(errorMessage);
     } finally {
@@ -89,35 +110,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }
   };
 
-  const register = async (name: string, email: string, password: string, role: string = 'editor') => {
-    try {
-      setLoading(true);
-      setError(null);
-      
-      const response = await axios.post(`${API_BASE_URL}/auth/register`, {
-        name,
-        email,
-        password,
-        role,
-      });
-
-      const { user: userData, token } = response.data.data;
-      
-      localStorage.setItem('token', token);
-      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-      setUser(userData);
-    } catch (error: any) {
-      const errorMessage = error.response?.data?.message || 'Registration failed. Please try again.';
-      setError(errorMessage);
-      throw new Error(errorMessage);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const logout = () => {
     localStorage.removeItem('token');
-    delete axios.defaults.headers.common['Authorization'];
+    localStorage.removeItem('userData');
     setUser(null);
     setError(null);
   };
@@ -126,10 +122,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     user,
     login,
     logout,
-    register,
     loading,
     error,
   };
 
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  return React.createElement(AuthContext.Provider, { value }, children);
 };

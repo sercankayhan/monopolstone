@@ -1,10 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import { Button, Input, Card } from '../components/ui';
 
 const Login: React.FC = () => {
-  const { login, loading, error } = useAuth();
+  const { login, loading, error, user } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+  
+  const from = (location.state as any)?.from?.pathname || '/admin';
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -35,6 +40,13 @@ const Login: React.FC = () => {
     return Object.keys(errors).length === 0;
   };
 
+  // Redirect if already logged in
+  useEffect(() => {
+    if (user) {
+      navigate(from, { replace: true });
+    }
+  }, [user, navigate, from]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
@@ -44,6 +56,7 @@ const Login: React.FC = () => {
 
     try {
       await login(formData.email, formData.password);
+      // Navigation will happen via useEffect when user state changes
     } catch (error) {
       // Error is handled by the useAuth hook
     }

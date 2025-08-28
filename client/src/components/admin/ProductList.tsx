@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button, Card, Modal, LoadingSpinner } from '../ui';
+import { getProductImage } from '../../utils/mockImages';
 
 interface Product {
   _id: string;
@@ -51,8 +52,8 @@ const ProductList: React.FC<ProductListProps> = ({ onEdit, onAdd, refreshTrigger
       isActive: true,
       isFeatured: true,
       images: [
-        { url: '/api/placeholder/300/200', alt: 'Marble Elegance', isPrimary: true },
-        { url: '/api/placeholder/300/200', alt: 'Marble Detail', isPrimary: false },
+        { url: getProductImage('marble-elegance-countertop'), alt: 'Marble Elegance', isPrimary: true },
+        { url: getProductImage('marble-elegance-countertop'), alt: 'Marble Detail', isPrimary: false },
       ],
       createdAt: '2024-01-15T10:30:00Z',
       updatedAt: '2024-01-20T14:45:00Z',
@@ -67,7 +68,7 @@ const ProductList: React.FC<ProductListProps> = ({ onEdit, onAdd, refreshTrigger
       isActive: true,
       isFeatured: false,
       images: [
-        { url: '/api/placeholder/300/200', alt: 'Industrial Concrete', isPrimary: true },
+        { url: getProductImage('granite-supreme-surface'), alt: 'Industrial Concrete', isPrimary: true },
       ],
       createdAt: '2024-01-10T09:15:00Z',
       updatedAt: '2024-01-18T16:20:00Z',
@@ -82,9 +83,9 @@ const ProductList: React.FC<ProductListProps> = ({ onEdit, onAdd, refreshTrigger
       isActive: false,
       isFeatured: true,
       images: [
-        { url: '/api/placeholder/300/200', alt: 'Granite Premium', isPrimary: true },
-        { url: '/api/placeholder/300/200', alt: 'Granite Texture', isPrimary: false },
-        { url: '/api/placeholder/300/200', alt: 'Granite Installation', isPrimary: false },
+        { url: getProductImage('granite-outdoor-paving'), alt: 'Granite Premium', isPrimary: true },
+        { url: getProductImage('granite-outdoor-kitchen'), alt: 'Granite Texture', isPrimary: false },
+        { url: getProductImage('natural-stone-wall'), alt: 'Granite Installation', isPrimary: false },
       ],
       createdAt: '2024-01-05T11:20:00Z',
       updatedAt: '2024-01-22T13:10:00Z',

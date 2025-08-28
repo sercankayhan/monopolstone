@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import AdminLayout from '../components/admin/AdminLayout';
+import ProductList from '../components/admin/ProductList';
+import CategoryList from '../components/admin/CategoryList';
+import MediaLibrary from '../components/admin/MediaLibrary';
+import ContactManagement from '../components/admin/ContactManagement';
 import { Card, Button } from '../components/ui';
 
 interface DashboardStats {
@@ -185,17 +189,35 @@ const AdminDashboard: React.FC = () => {
     }
   };
 
-  if (activeSection !== 'dashboard') {
-    return <div>Section: {activeSection} (Not implemented yet)</div>;
-  }
+  const renderSectionContent = () => {
+    switch (activeSection) {
+      case 'products':
+        return (
+          <ProductList
+            onEdit={() => {}} // TODO: Implement product editing
+            onAdd={() => {}} // TODO: Implement product adding
+          />
+        );
+      case 'categories':
+        return (
+          <CategoryList
+            onEdit={() => {}} // TODO: Implement category editing
+            onAdd={() => {}} // TODO: Implement category adding
+          />
+        );
+      case 'media':
+        return <MediaLibrary />;
+      case 'contacts':
+        return <ContactManagement />;
+      case 'dashboard':
+      default:
+        return renderDashboardContent();
+    }
+  };
 
-  return (
-    <AdminLayout
-      title="Dashboard"
-      subtitle="Overview of your artificial stone business"
-      activeSection={activeSection}
-      onSectionChange={setActiveSection}
-    >
+  const renderDashboardContent = () => (
+
+    <>
       {/* Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mb-8">
         {stats.map((stat, index) => (
@@ -337,6 +359,35 @@ const AdminDashboard: React.FC = () => {
           </div>
         </Card>
       </motion.div>
+    </>
+  );
+
+  const getSectionTitle = () => {
+    switch (activeSection) {
+      case 'products':
+        return { title: 'Product Management', subtitle: 'Manage your product catalog' };
+      case 'categories':
+        return { title: 'Category Management', subtitle: 'Organize your product categories' };
+      case 'media':
+        return { title: 'Media Library', subtitle: 'Manage images and files' };
+      case 'contacts':
+        return { title: 'Contact Management', subtitle: 'Handle customer inquiries' };
+      case 'dashboard':
+      default:
+        return { title: 'Dashboard', subtitle: 'Overview of your artificial stone business' };
+    }
+  };
+
+  const sectionInfo = getSectionTitle();
+
+  return (
+    <AdminLayout
+      title={sectionInfo.title}
+      subtitle={sectionInfo.subtitle}
+      activeSection={activeSection}
+      onSectionChange={setActiveSection}
+    >
+      {renderSectionContent()}
     </AdminLayout>
   );
 };

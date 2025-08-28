@@ -63,7 +63,7 @@ const Card: React.FC<CardProps> = ({
       <motion.div
         className={baseClasses}
         onClick={onClick}
-        whileHover={{ y: -4, shadow: '0 10px 25px -3px rgba(0, 0, 0, 0.1)' }}
+        whileHover={{ y: -4, boxShadow: '0 10px 25px -3px rgba(0, 0, 0, 0.1)' }}
         whileTap={{ y: -2 }}
         transition={{ type: 'spring', stiffness: 400, damping: 17 }}
       >

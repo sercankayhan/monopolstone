@@ -1,7 +1,7 @@
 import React, { ButtonHTMLAttributes, forwardRef } from 'react';
 import { motion } from 'framer-motion';
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'onDrag'> {
   variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger';
   size?: 'sm' | 'md' | 'lg' | 'xl';
   loading?: boolean;
@@ -76,7 +76,11 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         disabled={disabled || loading}
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
-        {...props}
+        onClick={props.onClick}
+        type={props.type}
+        form={props.form}
+        onFocus={props.onFocus}
+        onBlur={props.onBlur}
       >
         {loading && (
           <svg

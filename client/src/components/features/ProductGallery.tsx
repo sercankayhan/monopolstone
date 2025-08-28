@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Card, Modal } from '../ui';
+import { getProductImage } from '../../utils/mockImages';
 
 interface Product {
   id: number;
@@ -30,8 +31,8 @@ const ProductGallery: React.FC = () => {
       id: 1,
       name: 'Marble Elegance Series',
       category: 'Kitchen Countertops',
-      image: '/api/placeholder/400/300',
-      images: ['/api/placeholder/400/300', '/api/placeholder/400/300', '/api/placeholder/400/300'],
+      image: getProductImage('marble-elegance-countertop'),
+      images: [getProductImage('marble-elegance-countertop'), getProductImage('calacatta-gold-countertop'), getProductImage('carrara-marble-vanity')],
       description: 'Premium marble-look artificial stone perfect for kitchen countertops with superior durability and stain resistance.',
       specifications: {
         dimensions: '3000mm x 1400mm x 20mm',
@@ -46,8 +47,8 @@ const ProductGallery: React.FC = () => {
       id: 2,
       name: 'Industrial Concrete Look',
       category: 'Bathroom Vanities',
-      image: '/api/placeholder/400/300',
-      images: ['/api/placeholder/400/300', '/api/placeholder/400/300'],
+      image: getProductImage('granite-supreme-surface'),
+      images: [getProductImage('granite-supreme-surface'), getProductImage('onyx-luxury-bathroom')],
       description: 'Modern concrete aesthetic with the benefits of engineered stone. Perfect for contemporary bathroom designs.',
       specifications: {
         dimensions: '2400mm x 600mm x 15mm',
@@ -62,8 +63,8 @@ const ProductGallery: React.FC = () => {
       id: 3,
       name: 'Granite Premium Collection',
       category: 'Wall Cladding',
-      image: '/api/placeholder/400/300',
-      images: ['/api/placeholder/400/300', '/api/placeholder/400/300', '/api/placeholder/400/300', '/api/placeholder/400/300'],
+      image: getProductImage('granite-outdoor-paving'),
+      images: [getProductImage('granite-outdoor-paving'), getProductImage('granite-outdoor-kitchen'), getProductImage('natural-stone-wall'), getProductImage('cultured-stone-facade')],
       description: 'Authentic granite appearance with consistent patterns. Ideal for interior and exterior wall applications.',
       specifications: {
         dimensions: '1200mm x 800mm x 10mm',

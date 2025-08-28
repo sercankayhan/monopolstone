@@ -1,24 +1,37 @@
 import React from 'react';
-import { Header, Footer } from './components/layout';
-import { HeroSection, ProductGallery, ContactForm } from './components/features';
-import AboutSection from './components/features/AboutSection';
-import ServicesSection from './components/features/ServicesSection';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { AuthProvider } from './hooks/useAuth';
+import { ProtectedRoute } from './components/auth';
+import Landing from './pages/Landing';
+import Login from './pages/Login';
+import AdminDashboard from './pages/AdminDashboard';
 
 function App() {
   return (
-    <div className="min-h-screen bg-white">
-      <Header transparent />
-      
-      <main>
-        <HeroSection />
-        <AboutSection />
-        <ProductGallery />
-        <ServicesSection />
-        <ContactForm />
-      </main>
-      
-      <Footer />
-    </div>
+    <AuthProvider>
+      <Router>
+        <div className="min-h-screen bg-white">
+          <Routes>
+            {/* Public Routes */}
+            <Route path="/" element={<Landing />} />
+            <Route path="/login" element={<Login />} />
+            
+            {/* Protected Admin Routes */}
+            <Route 
+              path="/admin/*" 
+              element={
+                <ProtectedRoute>
+                  <AdminDashboard />
+                </ProtectedRoute>
+              } 
+            />
+            
+            {/* Catch all route - redirect to home */}
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </div>
+      </Router>
+    </AuthProvider>
   );
 }
 
