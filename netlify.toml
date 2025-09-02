@@ -1,15 +1,18 @@
 [build]
+  base = "."
   publish = "client/build"
   command = "npm run build:client"
+
+[build.environment]
+  NODE_VERSION = "18"
+  NPM_VERSION = "9"
+  CI = "false"
 
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
-
-[build.environment]
-  NODE_VERSION = "18"
-  NPM_VERSION = "9"
+  force = true
 
 [[headers]]
   for = "/*"
@@ -18,3 +21,4 @@
     X-XSS-Protection = "1; mode=block"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
+    Cache-Control = "public, max-age=0, must-revalidate"
