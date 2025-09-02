@@ -18,5 +18,7 @@
   "env": {
     "NODE_VERSION": "18",
     "NPM_VERSION": "9"
-  }
+  },
+  "buildCommand": "npm run build:client",
+  "outputDirectory": "client/build"
 }
