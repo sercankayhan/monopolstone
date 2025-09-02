@@ -5,6 +5,7 @@ import ProductList from '../components/admin/ProductList';
 import CategoryList from '../components/admin/CategoryList';
 import MediaLibrary from '../components/admin/MediaLibrary';
 import ContactManagement from '../components/admin/ContactManagement';
+import ContentManagement from '../components/admin/ContentManagement';
 import { Card, Button } from '../components/ui';
 
 interface DashboardStats {
@@ -209,6 +210,8 @@ const AdminDashboard: React.FC = () => {
         return <MediaLibrary />;
       case 'contacts':
         return <ContactManagement />;
+      case 'content':
+        return <ContentManagement />;
       case 'dashboard':
       default:
         return renderDashboardContent();

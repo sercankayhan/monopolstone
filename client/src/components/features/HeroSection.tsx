@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Button } from '../ui';
+import { Button, WhatsAppButton } from '../ui';
 import { mockHeroImages } from '../../utils/mockImages';
 
 interface HeroSlide {
@@ -17,40 +18,41 @@ interface HeroSlide {
 
 const HeroSection: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const { t } = useTranslation();
   const [autoPlay, setAutoPlay] = useState(true);
 
   const heroSlides: HeroSlide[] = [
     {
       id: 1,
-      title: 'Premium Artificial Stone',
-      subtitle: 'Crafted for Perfection',
-      description: 'Transform your spaces with our premium artificial stone solutions. Durable, elegant, and designed to last a lifetime.',
-      image: mockHeroImages[0],
+      title: t('hero.slide1.title', { defaultValue: 'Premium Artificial Stone' }),
+      subtitle: t('hero.slide1.subtitle', { defaultValue: 'Crafted for Perfection' }),
+      description: t('hero.slide1.description', { defaultValue: 'Transform your spaces with our premium artificial stone solutions. Durable, elegant, and designed to last a lifetime.' }),
+      image: '/mitra-gölge.jpg',
       cta: {
-        primary: 'Explore Products',
-        secondary: 'Get Quote'
+        primary: t('hero.slide1.ctaPrimary', { defaultValue: 'Explore Products' }),
+        secondary: t('hero.slide1.ctaSecondary', { defaultValue: 'Get Quote' })
       }
     },
     {
       id: 2,
-      title: 'Custom Design Solutions',
-      subtitle: 'Tailored to Your Vision',
-      description: 'Create unique architectural elements with our custom artificial stone designs. From concept to installation.',
-      image: mockHeroImages[1],
+      title: t('hero.slide2.title', { defaultValue: 'Custom Design Solutions' }),
+      subtitle: t('hero.slide2.subtitle', { defaultValue: 'Tailored to Your Vision' }),
+      description: t('hero.slide2.description', { defaultValue: 'Create unique architectural elements with our custom artificial stone designs. From concept to installation.' }),
+      image: '/luminar-sis.jpg',
       cta: {
-        primary: 'View Gallery',
-        secondary: 'Contact Us'
+        primary: t('hero.slide2.ctaPrimary', { defaultValue: 'View Gallery' }),
+        secondary: t('hero.slide2.ctaSecondary', { defaultValue: 'Contact Us' })
       }
     },
     {
       id: 3,
-      title: 'Professional Installation',
-      subtitle: 'Expert Craftsmanship',
-      description: 'Our certified professionals ensure perfect installation with attention to every detail. Quality guaranteed.',
-      image: '/api/placeholder/1920/1080',
+      title: t('hero.slide3.title', { defaultValue: 'Professional Installation' }),
+      subtitle: t('hero.slide3.subtitle', { defaultValue: 'Expert Craftsmanship' }),
+      description: t('hero.slide3.description', { defaultValue: 'Our certified professionals ensure perfect installation with attention to every detail. Quality guaranteed.' }),
+      image: '/belezza-günbatımı.jpg',
       cta: {
-        primary: 'Our Services',
-        secondary: 'Schedule Consultation'
+        primary: t('hero.slide3.ctaPrimary', { defaultValue: 'Our Services' }),
+        secondary: t('hero.slide3.ctaSecondary', { defaultValue: 'Schedule Consultation' })
       }
     }
   ];
@@ -90,6 +92,13 @@ const HeroSection: React.FC = () => {
     }
   };
 
+  const getImageSrc = (path: string) => {
+    const normalized = encodeURI(path.normalize('NFC'));
+    const withSlash = normalized.startsWith('/') ? normalized : `/${normalized}`;
+    const base = (process.env.PUBLIC_URL || '').replace(/\/$/, '');
+    return `${base}${withSlash}`;
+  };
+
   return (
     <section id="hero" className="relative h-screen overflow-hidden">
       <AnimatePresence mode="wait">
@@ -105,7 +114,7 @@ const HeroSection: React.FC = () => {
           <div 
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
             style={{
-              backgroundImage: `url(${heroSlides[currentSlide].image})`,
+              backgroundImage: `url(${getImageSrc(heroSlides[currentSlide].image)})`,
             }}
           />
           
@@ -216,7 +225,7 @@ const HeroSection: React.FC = () => {
         transition={{ duration: 2, repeat: Infinity }}
       >
         <div className="flex flex-col items-center text-white">
-          <span className="text-sm mb-2 rotate-90 origin-center">Scroll</span>
+          <span className="text-sm mb-2 rotate-90 origin-center">{t('hero.scroll')}</span>
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
           </svg>

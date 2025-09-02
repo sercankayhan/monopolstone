@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Card, Modal } from '../ui';
 import { getProductImage } from '../../utils/mockImages';
@@ -21,6 +22,7 @@ interface Product {
 }
 
 const ProductGallery: React.FC = () => {
+  const { t } = useTranslation();
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
@@ -29,112 +31,212 @@ const ProductGallery: React.FC = () => {
   const products: Product[] = [
     {
       id: 1,
-      name: 'Marble Elegance Series',
-      category: 'Kitchen Countertops',
-      image: getProductImage('marble-elegance-countertop'),
-      images: [getProductImage('marble-elegance-countertop'), getProductImage('calacatta-gold-countertop'), getProductImage('carrara-marble-vanity')],
-      description: 'Premium marble-look artificial stone perfect for kitchen countertops with superior durability and stain resistance.',
+      name: 'Mitra',
+      category: 'Kültür Taşı',
+      image: '/mitra-gölge.jpg',
+      images: ['/mitra-gölge.jpg', '/mitra-sis.jpg', '/mitra-toprak.jpg'],
+      description: 'Zengin doku ve doğal görünüm sunan kültür taşı koleksiyonu.',
       specifications: {
-        dimensions: '3000mm x 1400mm x 20mm',
-        material: 'Quartz Composite',
-        finish: 'Polished',
-        colors: ['Carrara White', 'Calacatta Gold', 'Statuario']
+        dimensions: 'Değişken',
+        material: 'Kompozit Taş',
+        finish: 'Doğal Doku',
+        colors: ['Gölge', 'Sis', 'Toprak']
       },
-      tags: ['premium', 'kitchen', 'marble', 'durable'],
+      tags: ['kultur-tasi', 'dekoratif', 'duvar'],
       featured: true
     },
     {
       id: 2,
-      name: 'Industrial Concrete Look',
-      category: 'Bathroom Vanities',
-      image: getProductImage('granite-supreme-surface'),
-      images: [getProductImage('granite-supreme-surface'), getProductImage('onyx-luxury-bathroom')],
-      description: 'Modern concrete aesthetic with the benefits of engineered stone. Perfect for contemporary bathroom designs.',
+      name: 'Luminar',
+      category: 'Kültür Taşı',
+      image: '/luminar-sis.jpg',
+      images: ['/luminar-gölge.jpg', '/luminar-sis.jpg', '/luminar-toprak.jpg'],
+      description: 'Modern çizgilere sahip, iç ve dış mekânlarda uyumlu kültür taşı.',
       specifications: {
-        dimensions: '2400mm x 600mm x 15mm',
-        material: 'Engineered Stone',
-        finish: 'Matte',
-        colors: ['Charcoal Grey', 'Industrial White']
+        dimensions: 'Değişken',
+        material: 'Kompozit Taş',
+        finish: 'Mat',
+        colors: ['Gölge', 'Sis', 'Toprak']
       },
-      tags: ['modern', 'bathroom', 'concrete', 'contemporary'],
-      featured: false
-    },
-    {
-      id: 3,
-      name: 'Granite Premium Collection',
-      category: 'Wall Cladding',
-      image: getProductImage('granite-outdoor-paving'),
-      images: [getProductImage('granite-outdoor-paving'), getProductImage('granite-outdoor-kitchen'), getProductImage('natural-stone-wall'), getProductImage('cultured-stone-facade')],
-      description: 'Authentic granite appearance with consistent patterns. Ideal for interior and exterior wall applications.',
-      specifications: {
-        dimensions: '1200mm x 800mm x 10mm',
-        material: 'Porcelain Composite',
-        finish: 'Textured',
-        colors: ['Black Galaxy', 'Kashmir Gold', 'Absolute Black']
-      },
-      tags: ['granite', 'wall', 'exterior', 'textured'],
+      tags: ['kultur-tasi', 'modern', 'dis-cephe'],
       featured: true
     },
     {
-      id: 4,
-      name: 'Travertine Natural',
-      category: 'Flooring',
-      image: '/api/placeholder/400/300',
-      images: ['/api/placeholder/400/300', '/api/placeholder/400/300'],
-      description: 'Classic travertine look with modern performance. Perfect for high-traffic flooring applications.',
+      id: 3,
+      name: 'Belezza',
+      category: 'Kültür Taşı',
+      image: '/belezza-yıldız.jpg',
+      images: ['/belezza-günbatımı.jpg', '/belezza-yıldız.jpg'],
+      description: 'Zarif dokusuyla mekanlara sofistike bir hava katar.',
       specifications: {
-        dimensions: '600mm x 400mm x 12mm',
-        material: 'Ceramic Stone',
-        finish: 'Honed',
-        colors: ['Ivory Cream', 'Walnut Brown']
+        dimensions: 'Değişken',
+        material: 'Kompozit Taş',
+        finish: 'Yarı Mat',
+        colors: ['Günbatımı', 'Yıldız']
       },
-      tags: ['travertine', 'flooring', 'natural', 'classic'],
+      tags: ['kultur-tasi', 'zarif', 'ic-mekan'],
+      featured: false
+    },
+    {
+      id: 4,
+      name: 'Arvion',
+      category: 'Kültür Taşı',
+      image: '/arvion-toprak.jpg',
+      images: ['/arvion-gölge.jpg', '/arvion-sis.jpg', '/arvion-toprak.jpg'],
+      description: 'Güçlü karaktere sahip doğal taş hissi.',
+      specifications: {
+        dimensions: 'Değişken',
+        material: 'Kompozit Taş',
+        finish: 'Doğal Kırık',
+        colors: ['Gölge', 'Sis', 'Toprak']
+      },
+      tags: ['kultur-tasi', 'rustik', 'duvar-kaplama'],
       featured: false
     },
     {
       id: 5,
-      name: 'Onyx Luxury Line',
-      category: 'Feature Walls',
-      image: '/api/placeholder/400/300',
-      images: ['/api/placeholder/400/300', '/api/placeholder/400/300', '/api/placeholder/400/300'],
-      description: 'Stunning onyx patterns with backlight capabilities. Create dramatic feature walls and accent pieces.',
+      name: 'Tivoli',
+      category: 'Kültür Taşı',
+      image: '/tivoli-antrasit.jpg',
+      images: ['/tivoli-gölge.jpg', '/tivoli-sis.jpg', '/tivoli-toprak.jpg', '/tivoli-antrasit.jpg'],
+      description: 'Zamanı aşan çizgilerle modern ve doğal bir görünüm.',
       specifications: {
-        dimensions: '3200mm x 1600mm x 6mm',
-        material: 'Translucent Composite',
-        finish: 'Polished',
-        colors: ['Honey Onyx', 'Green Onyx', 'White Onyx']
+        dimensions: 'Değişken',
+        material: 'Kompozit Taş',
+        finish: 'Doğal Doku',
+        colors: ['Gölge', 'Sis', 'Toprak', 'Antrasit']
       },
-      tags: ['onyx', 'luxury', 'backlit', 'feature'],
+      tags: ['kultur-tasi', 'modern', 'mimari'],
       featured: true
     },
     {
       id: 6,
-      name: 'Sandstone Rustic',
-      category: 'Outdoor Paving',
-      image: '/api/placeholder/400/300',
-      images: ['/api/placeholder/400/300', '/api/placeholder/400/300'],
-      description: 'Weather-resistant sandstone effect for outdoor applications. Non-slip surface for safety.',
+      name: 'Leon',
+      category: 'Kültür Tuğlası',
+      image: '/leon-inci.jpg',
+      images: [
+        '/leon-inci.jpg',
+        '/leon-çakıl.jpg',
+        '/leon-çöl 1.jpg',
+        '/leon-köz.jpg',
+        '/leon-lav.jpg',
+        '/leon-mix.jpg'
+      ],
+      description: 'Doğal tuğla dokusunu yansıtan, sıcak ve samimi görünüm.',
       specifications: {
-        dimensions: '400mm x 400mm x 20mm',
-        material: 'Weather Composite',
-        finish: 'Anti-slip',
-        colors: ['Desert Sand', 'River Rock', 'Sunset Red']
+        dimensions: 'Değişken',
+        material: 'Kompozit Tuğla',
+        finish: 'Mat',
+        colors: ['İnci', 'Çakıl', 'Çöl', 'Köz', 'Lav', 'Mix']
       },
-      tags: ['sandstone', 'outdoor', 'paving', 'weather-resistant'],
+      tags: ['kultur-tuglasi', 'rustik', 'ic-dis-mekan'],
+      featured: false
+    },
+    {
+      id: 7,
+      name: 'Leila',
+      category: 'Kültür Tuğlası',
+      image: '/leila-lav.jpg',
+      images: [
+        '/leila-inci.jpg',
+        '/leila-çakıl.jpg',
+        '/leila-çol 1.jpg',
+        '/leila-köz.jpg',
+        '/leila-lav.jpg',
+        '/leila-mix.jpg'
+      ],
+      description: 'Zarif tuğla dokusuyla modern ve klasik çizgileri buluşturur.',
+      specifications: {
+        dimensions: 'Değişken',
+        material: 'Kompozit Tuğla',
+        finish: 'Yarı Mat',
+        colors: ['İnci', 'Çakıl', 'Çöl', 'Köz', 'Lav', 'Mix']
+      },
+      tags: ['kultur-tuglasi', 'zarif', 'dekoratif'],
+      featured: false
+    },
+    {
+      id: 8,
+      name: 'Lora',
+      category: 'Kültür Tuğlası',
+      image: '/lora-köz.jpg',
+      images: [
+        '/lora-inci.jpg',
+        '/lora-çakıl.jpg',
+        '/lora-çöl 1.jpg',
+        '/lora-köz.jpg',
+        '/lora-lav.jpg',
+        '/lora-mix.jpg'
+      ],
+      description: 'Minimal hatlarla doğal tuğla görünümü.',
+      specifications: {
+        dimensions: 'Değişken',
+        material: 'Kompozit Tuğla',
+        finish: 'Mat',
+        colors: ['İnci', 'Çakıl', 'Çöl', 'Köz', 'Lav', 'Mix']
+      },
+      tags: ['kultur-tuglasi', 'minimal', 'duvar-kaplama'],
       featured: false
     }
   ];
 
-  const categories = ['All', ...Array.from(new Set(products.map(p => p.category)))];
+  // Debug: Log products array
+  console.log('Products array loaded:', products.length, 'products');
+
+  const categories = ['All', 'Kültür Taşı', 'Kültür Tuğlası'];
 
   const filteredProducts = useMemo(() => {
-    return products.filter(product => {
+    console.log('Filtering products:', { selectedCategory, searchTerm, totalProducts: products.length });
+    
+    const filtered = products.filter(product => {
       const matchesCategory = selectedCategory === 'All' || product.category === selectedCategory;
-      const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      const matchesSearch = searchTerm === '' || 
+                           product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
                            product.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()));
+      
+      console.log(`Product ${product.name}: category=${product.category}, matchesCategory=${matchesCategory}, matchesSearch=${matchesSearch}`);
+      
       return matchesCategory && matchesSearch;
     });
+    
+    console.log('Filtered products count:', filtered.length);
+    return filtered;
   }, [selectedCategory, searchTerm]);
+
+  const toAsciiPath = (path: string) => {
+    // Replace Turkish characters and strip combining marks
+    const replaced = path
+      .replace(/ğ/g, 'g').replace(/Ğ/g, 'G')
+      .replace(/ü/g, 'u').replace(/Ü/g, 'U')
+      .replace(/ş/g, 's').replace(/Ş/g, 'S')
+      .replace(/ı/g, 'i').replace(/İ/g, 'I')
+      .replace(/ö/g, 'o').replace(/Ö/g, 'O')
+      .replace(/ç/g, 'c').replace(/Ç/g, 'C');
+    return replaced.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  };
+
+  const setFallbackSrc = (e: React.SyntheticEvent<HTMLImageElement>) => {
+    const img = e.currentTarget;
+    const triedAscii = img.getAttribute('data-tried-ascii') === 'true';
+    const originalSrc = (img.getAttribute('data-original-src') || img.src).normalize('NFC');
+    if (!triedAscii) {
+      // First fallback: ASCII-normalized variant (encoded)
+      const asciiSrc = encodeURI(toAsciiPath(originalSrc));
+      img.setAttribute('data-tried-ascii', 'true');
+      if (!img.src.endsWith(asciiSrc)) {
+        img.src = asciiSrc;
+        return;
+      }
+    }
+    // If already tried ASCII, do nothing further
+  };
+
+  const getImageSrc = (path: string) => {
+    const normalized = encodeURI(path.normalize('NFC'));
+    const withSlash = normalized.startsWith('/') ? normalized : `/${normalized}`;
+    const base = (process.env.PUBLIC_URL || '').replace(/\/$/, '');
+    return `${base}${withSlash}`;
+  };
 
   const openProductModal = (product: Product) => {
     setSelectedProduct(product);
@@ -170,10 +272,10 @@ const ProductGallery: React.FC = () => {
           viewport={{ once: true }}
         >
           <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4 font-heading">
-            Our Product Gallery
+            {t('gallery.title')}
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Explore our extensive collection of premium artificial stone products designed for every application
+            {t('gallery.subtitle')}
           </p>
         </motion.div>
 
@@ -193,7 +295,7 @@ const ProductGallery: React.FC = () => {
               </svg>
               <input
                 type="text"
-                placeholder="Search products..."
+                placeholder={t('gallery.searchPlaceholder')}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors duration-200"
@@ -201,7 +303,7 @@ const ProductGallery: React.FC = () => {
             </div>
             
             <div className="flex items-center gap-2 text-sm text-gray-600">
-              <span>Showing {filteredProducts.length} of {products.length} products</span>
+              <span>{t('gallery.showing', { count: filteredProducts.length, total: products.length })}</span>
             </div>
           </div>
 
@@ -210,7 +312,10 @@ const ProductGallery: React.FC = () => {
             {categories.map((category) => (
               <motion.button
                 key={category}
-                onClick={() => setSelectedCategory(category)}
+                onClick={() => {
+                  console.log('Category selected:', category);
+                  setSelectedCategory(category);
+                }}
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
                   selectedCategory === category
                     ? 'bg-primary text-white shadow-md'
@@ -219,7 +324,7 @@ const ProductGallery: React.FC = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                {category}
+                {category === 'All' ? t('gallery.all') : category}
               </motion.button>
             ))}
           </div>
@@ -250,18 +355,20 @@ const ProductGallery: React.FC = () => {
                   <div className="relative overflow-hidden rounded-lg mb-4">
                     {product.featured && (
                       <div className="absolute top-3 left-3 z-10 bg-accent text-white px-2 py-1 rounded-full text-xs font-medium">
-                        Featured
+                        {t('gallery.featured')}
                       </div>
                     )}
                     
                     <img
-                      src={product.image}
+                      src={getImageSrc(product.image)}
+                      data-original-src={product.image}
+                      onError={setFallbackSrc}
                       alt={product.name}
                       className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110"
                     />
                     
                     <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                      <span className="text-white font-medium">View Details</span>
+                      <span className="text-white font-medium">{t('gallery.viewDetails')}</span>
                     </div>
                   </div>
                   
@@ -297,8 +404,8 @@ const ProductGallery: React.FC = () => {
             <svg className="mx-auto h-12 w-12 text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9.172 16.172a4 4 0 015.656 0M9 12h6m-6-4h6m2 5.291A7.962 7.962 0 0112 20.4a7.962 7.962 0 01-5.657-2.109L5 17l1.293-1.293A7.962 7.962 0 014.6 12 7.962 7.962 0 016.343 6.343M17.657 6.343A7.962 7.962 0 0119.4 12c0 1.21-.27 2.364-.757 3.391L20 17l-1.343 1.291z" />
             </svg>
-            <h3 className="text-lg font-medium text-gray-900 mb-2">No products found</h3>
-            <p className="text-gray-500">Try adjusting your search or filter criteria</p>
+            <h3 className="text-lg font-medium text-gray-900 mb-2">{t('gallery.emptyTitle')}</h3>
+            <p className="text-gray-500">{t('gallery.emptySubtitle')}</p>
           </motion.div>
         )}
       </div>
@@ -316,7 +423,9 @@ const ProductGallery: React.FC = () => {
             <div>
               <div className="relative mb-4">
                 <img
-                  src={selectedProduct.images[currentImageIndex]}
+                  src={getImageSrc(selectedProduct.images[currentImageIndex])}
+                  data-original-src={selectedProduct.images[currentImageIndex]}
+                  onError={setFallbackSrc}
                   alt={selectedProduct.name}
                   className="w-full h-96 object-cover rounded-lg"
                 />
@@ -370,29 +479,29 @@ const ProductGallery: React.FC = () => {
               
               {/* Specifications */}
               <div className="mb-6">
-                <h3 className="text-lg font-semibold text-primary mb-3">Specifications</h3>
+                <h3 className="text-lg font-semibold text-primary mb-3">{t('gallery.specs.title')}</h3>
                 <div className="space-y-2">
                   {selectedProduct.specifications.dimensions && (
                     <div className="flex justify-between">
-                      <span className="text-gray-600">Dimensions:</span>
+                      <span className="text-gray-600">{t('gallery.specs.dimensions')}</span>
                       <span className="font-medium">{selectedProduct.specifications.dimensions}</span>
                     </div>
                   )}
                   {selectedProduct.specifications.material && (
                     <div className="flex justify-between">
-                      <span className="text-gray-600">Material:</span>
+                      <span className="text-gray-600">{t('gallery.specs.material')}</span>
                       <span className="font-medium">{selectedProduct.specifications.material}</span>
                     </div>
                   )}
                   {selectedProduct.specifications.finish && (
                     <div className="flex justify-between">
-                      <span className="text-gray-600">Finish:</span>
+                      <span className="text-gray-600">{t('gallery.specs.finish')}</span>
                       <span className="font-medium">{selectedProduct.specifications.finish}</span>
                     </div>
                   )}
                   {selectedProduct.specifications.colors && (
                     <div>
-                      <span className="text-gray-600">Available Colors:</span>
+                      <span className="text-gray-600">{t('gallery.specs.colors')}</span>
                       <div className="flex flex-wrap gap-1 mt-1">
                         {selectedProduct.specifications.colors.map((color) => (
                           <span key={color} className="px-2 py-1 bg-gray-100 text-gray-700 rounded text-sm">
@@ -407,7 +516,7 @@ const ProductGallery: React.FC = () => {
 
               {/* Tags */}
               <div className="mb-6">
-                <h3 className="text-lg font-semibold text-primary mb-3">Tags</h3>
+                <h3 className="text-lg font-semibold text-primary mb-3">{t('gallery.tags')}</h3>
                 <div className="flex flex-wrap gap-2">
                   {selectedProduct.tags.map((tag) => (
                     <span key={tag} className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm">
@@ -431,10 +540,10 @@ const ProductGallery: React.FC = () => {
                   }}
                   className="flex-1 bg-primary text-white py-3 px-6 rounded-lg font-medium hover:bg-primary/90 transition-colors duration-200"
                 >
-                  Request Quote
+                  {t('gallery.requestQuote')}
                 </button>
                 <button className="px-6 py-3 border border-gray-300 text-gray-700 rounded-lg font-medium hover:bg-gray-50 transition-colors duration-200">
-                  Download Specs
+                  {t('gallery.downloadSpecs')}
                 </button>
               </div>
             </div>

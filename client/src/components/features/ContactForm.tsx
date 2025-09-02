@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Button, Input, Card } from '../ui';
+import { useTranslation } from 'react-i18next';
+import { Button, Input, Card, WhatsAppButton } from '../ui';
 
 interface FormData {
   name: string;
@@ -16,6 +17,7 @@ interface FormErrors {
 }
 
 const ContactForm: React.FC = () => {
+  const { t } = useTranslation();
   const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
@@ -30,10 +32,10 @@ const ContactForm: React.FC = () => {
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
   const contactInfo = {
-    address: '123 Stone Avenue, Manufacturing District, City 12345',
-    phone: '+1 (555) 123-4567',
-    email: 'info@artificialstone.com',
-    hours: 'Mon - Fri: 8:00 AM - 6:00 PM\nSat: 9:00 AM - 4:00 PM\nSun: Closed'
+    address: t('contact.info.address'),
+    phone: t('contact.info.phone'),
+    email: t('contact.info.email'),
+    hours: t('contact.info.hoursValue')
   };
 
   const validateForm = (): boolean => {
@@ -132,10 +134,10 @@ const ContactForm: React.FC = () => {
           viewport={{ once: true }}
         >
           <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4 font-heading">
-            Get In Touch
+            {t('contact.title')}
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Ready to transform your space? Contact our experts for a consultation and custom quote
+            {t('contact.subtitle')}
           </p>
         </motion.div>
 
@@ -152,20 +154,18 @@ const ContactForm: React.FC = () => {
               {/* Company Info */}
               <Card className="p-6">
                 <div className="flex items-center space-x-3 mb-4">
-                  <div className="w-10 h-10 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center">
-                    <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M3 4a1 1 0 011-1h3a1 1 0 011 1v3a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 13a1 1 0 011-1h3a1 1 0 011 1v3a1 1 0 01-1 1H4a1 1 0 01-1-1v-3zM12 4a1 1 0 011-1h3a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1V4zM12 13a1 1 0 011-1h3a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-3z" clipRule="evenodd" />
-                    </svg>
+                  <div className="w-10 h-10 rounded-lg flex items-center justify-center overflow-hidden">
+                    <img src="/logo.jpeg" alt="Monopol Stone" className="w-full h-full object-cover" />
                   </div>
                   <div>
                     <h3 className="text-xl font-bold text-primary font-heading">
-                      ArtificialStone
+                      Monopol Stone
                     </h3>
                     <p className="text-accent text-sm">Premium Quality</p>
                   </div>
                 </div>
                 <p className="text-gray-600">
-                  Transform your spaces with our premium artificial stone solutions.
+                  Mekanlarınızı premium taş çözümlerimizle dönüştürün.
                 </p>
               </Card>
 
@@ -182,7 +182,7 @@ const ContactForm: React.FC = () => {
                     </svg>
                   </div>
                   <div>
-                    <h4 className="font-semibold text-primary mb-1">Address</h4>
+                    <h4 className="font-semibold text-primary mb-1">Adres</h4>
                     <p className="text-gray-600 text-sm leading-relaxed">
                       {contactInfo.address}
                     </p>
@@ -200,7 +200,7 @@ const ContactForm: React.FC = () => {
                     </svg>
                   </div>
                   <div>
-                    <h4 className="font-semibold text-primary mb-1">Phone</h4>
+                    <h4 className="font-semibold text-primary mb-1">Telefon</h4>
                     <p className="text-gray-600 text-sm">
                       <a href={`tel:${contactInfo.phone}`} className="hover:text-accent transition-colors">
                         {contactInfo.phone}
@@ -221,7 +221,7 @@ const ContactForm: React.FC = () => {
                     </svg>
                   </div>
                   <div>
-                    <h4 className="font-semibold text-primary mb-1">Email</h4>
+                    <h4 className="font-semibold text-primary mb-1">E-posta</h4>
                     <p className="text-gray-600 text-sm">
                       <a href={`mailto:${contactInfo.email}`} className="hover:text-accent transition-colors">
                         {contactInfo.email}
@@ -241,7 +241,7 @@ const ContactForm: React.FC = () => {
                     </svg>
                   </div>
                   <div>
-                    <h4 className="font-semibold text-primary mb-1">Hours</h4>
+                    <h4 className="font-semibold text-primary mb-1">Çalışma Saatleri</h4>
                     <p className="text-gray-600 text-sm leading-relaxed whitespace-pre-line">
                       {contactInfo.hours}
                     </p>
@@ -295,7 +295,7 @@ const ContactForm: React.FC = () => {
                 {/* Form Fields */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <Input
-                    label="Full Name"
+                    label="Ad Soyad"
                     required
                     value={formData.name}
                     onChange={(e) => handleInputChange('name', e.target.value)}
@@ -308,7 +308,7 @@ const ContactForm: React.FC = () => {
                   />
 
                   <Input
-                    label="Email Address"
+                    label="E-posta Adresi"
                     type="email"
                     required
                     value={formData.email}
@@ -325,7 +325,7 @@ const ContactForm: React.FC = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <Input
-                    label="Phone Number"
+                    label="Telefon Numarası"
                     type="tel"
                     value={formData.phone}
                     onChange={(e) => handleInputChange('phone', e.target.value)}
@@ -338,7 +338,7 @@ const ContactForm: React.FC = () => {
                   />
 
                   <Input
-                    label="Company (Optional)"
+                    label="Şirket (İsteğe Bağlı)"
                     value={formData.company}
                     onChange={(e) => handleInputChange('company', e.target.value)}
                     leftIcon={
@@ -350,7 +350,7 @@ const ContactForm: React.FC = () => {
                 </div>
 
                 <Input
-                  label="Subject"
+                                      label="Konu"
                   required
                   value={formData.subject}
                   onChange={(e) => handleInputChange('subject', e.target.value)}
@@ -364,7 +364,7 @@ const ContactForm: React.FC = () => {
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Message <span className="text-error">*</span>
+                    Mesaj <span className="text-error">*</span>
                   </label>
                   <textarea
                     rows={6}
@@ -375,7 +375,7 @@ const ContactForm: React.FC = () => {
                         ? 'border-error focus:border-error focus:ring-error/20'
                         : 'border-gray-300 focus:border-primary focus:ring-primary/20'
                     }`}
-                    placeholder="Tell us about your project requirements..."
+                    placeholder="Proje gereksinimleriniz hakkında bize bilgi verin..."
                   />
                   {errors.message && (
                     <p className="mt-1 text-sm text-error flex items-center gap-1">
@@ -396,7 +396,7 @@ const ContactForm: React.FC = () => {
                     fullWidth
                     disabled={isSubmitting}
                   >
-                    {isSubmitting ? 'Sending Message...' : 'Send Message'}
+                    {isSubmitting ? 'Gönderiliyor...' : 'Mesaj Gönder'}
                   </Button>
                 </div>
               </form>
@@ -404,6 +404,12 @@ const ContactForm: React.FC = () => {
           </motion.div>
         </div>
       </div>
+      
+      {/* WhatsApp Button */}
+      <WhatsAppButton 
+        phoneNumber="+905314720269"
+        message="Merhaba! Ürünleriniz hakkında bilgi almak istiyorum."
+      />
     </section>
   );
 };

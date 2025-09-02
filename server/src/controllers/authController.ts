@@ -1,18 +1,22 @@
 import { Request, Response } from 'express';
-import jwt from 'jsonwebtoken';
+import { sign, Secret, SignOptions } from 'jsonwebtoken';
 import { User } from '../models';
 import { asyncHandler, createError } from '../middleware';
 import { AuthRequest } from '../middleware/auth';
 
 const generateToken = (userId: string): string => {
-  const jwtSecret = process.env.JWT_SECRET;
-  if (!jwtSecret) {
+  const jwtSecretEnv = process.env.JWT_SECRET;
+  if (!jwtSecretEnv) {
     throw new Error('JWT_SECRET is not defined');
   }
-  
-  return jwt.sign({ userId }, jwtSecret, {
-    expiresIn: process.env.JWT_EXPIRES_IN || '7d',
-  });
+
+  const jwtSecret: Secret = jwtSecretEnv as Secret;
+
+  const options: SignOptions = {
+    expiresIn: (process.env.JWT_EXPIRES_IN || '7d') as unknown as number,
+  };
+
+  return sign({ userId }, jwtSecret, options);
 };
 
 export const register = asyncHandler(async (req: Request, res: Response) => {

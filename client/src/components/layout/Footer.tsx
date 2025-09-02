@@ -1,13 +1,17 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
+import { WhatsAppButton } from '../ui';
 
 const Footer: React.FC = () => {
+  const { t } = useTranslation();
+
   const companyInfo = {
-    name: 'ArtificialStone',
-    description: 'Premium artificial stone solutions for modern architecture and interior design.',
-    address: '123 Stone Avenue, Manufacturing District, City 12345',
-    phone: '+1 (555) 123-4567',
-    email: 'info@artificialstone.com',
+    name: 'Monopol Stone',
+    description: t('footer.description', { defaultValue: 'Premium engineered stone solutions for modern architecture and interior design.' }),
+    address: t('contact.info.address'),
+    phone: t('contact.info.phone'),
+    email: t('contact.info.email'),
   };
 
   const socialLinks = [
@@ -17,18 +21,18 @@ const Footer: React.FC = () => {
   ];
 
   const quickLinks = [
-    { name: 'Home', href: '#hero' },
-    { name: 'Products', href: '#products' },
-    { name: 'About Us', href: '#about' },
-    { name: 'Services', href: '#services' },
-    { name: 'Contact', href: '#contact' }
+    { name: t('nav.home'), href: '#hero' },
+    { name: t('nav.products'), href: '#products' },
+    { name: t('nav.about'), href: '#about' },
+    { name: t('nav.services'), href: '#services' },
+    { name: t('nav.contact'), href: '#contact' }
   ];
 
   const services = [
-    { name: 'Custom Design', href: '#' },
-    { name: 'Installation', href: '#' },
-    { name: 'Maintenance', href: '#' },
-    { name: 'Consultation', href: '#' }
+    { name: 'Özel Tasarım', href: '#' },
+    { name: 'Kurulum', href: '#' },
+    { name: 'Bakım', href: '#' },
+    { name: 'Danışmanlık', href: '#' }
   ];
 
   const scrollToSection = (href: string) => {
@@ -53,10 +57,8 @@ const Footer: React.FC = () => {
               viewport={{ once: true }}
             >
               <div className="flex items-center space-x-3 mb-6">
-                <div className="w-12 h-12 bg-gradient-to-br from-accent to-white/20 rounded-lg flex items-center justify-center">
-                  <svg className="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M3 4a1 1 0 011-1h3a1 1 0 011 1v3a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 13a1 1 0 011-1h3a1 1 0 011 1v3a1 1 0 01-1 1H4a1 1 0 01-1-1v-3zM12 4a1 1 0 011-1h3a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1V4zM12 13a1 1 0 011-1h3a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-3z" clipRule="evenodd" />
-                  </svg>
+                <div className="w-12 h-12 rounded-lg flex items-center justify-center overflow-hidden">
+                  <img src="/logo.jpeg" alt="Monopol Stone" className="w-full h-full object-cover" />
                 </div>
                 <div>
                   <h2 className="text-2xl font-bold font-heading">{companyInfo.name}</h2>
@@ -79,7 +81,12 @@ const Footer: React.FC = () => {
                   <svg className="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 20 20">
                     <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
                   </svg>
-                  <span className="text-gray-300 text-sm">{companyInfo.phone}</span>
+                  <a 
+                    href="tel:+905314720269" 
+                    className="text-gray-300 text-sm hover:text-accent transition-colors duration-200 cursor-pointer"
+                  >
+                    {companyInfo.phone}
+                  </a>
                 </div>
                 <div className="flex items-center space-x-3">
                   <svg className="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 20 20">
@@ -115,7 +122,7 @@ const Footer: React.FC = () => {
               transition={{ duration: 0.6, delay: 0.1 }}
               viewport={{ once: true }}
             >
-              <h3 className="text-lg font-semibold font-heading mb-6">Quick Links</h3>
+              <h3 className="text-lg font-semibold font-heading mb-6">{t('footer.quickLinks', { defaultValue: 'Quick Links' })}</h3>
               <ul className="space-y-3">
                 {quickLinks.map((link) => (
                   <li key={link.name}>
@@ -137,7 +144,7 @@ const Footer: React.FC = () => {
               transition={{ duration: 0.6, delay: 0.2 }}
               viewport={{ once: true }}
             >
-              <h3 className="text-lg font-semibold font-heading mb-6">Services</h3>
+              <h3 className="text-lg font-semibold font-heading mb-6">{t('footer.services', { defaultValue: 'Services' })}</h3>
               <ul className="space-y-3">
                 {services.map((service) => (
                   <li key={service.name}>
@@ -181,6 +188,12 @@ const Footer: React.FC = () => {
           </div>
         </motion.div>
       </div>
+      
+      {/* WhatsApp Button */}
+      <WhatsAppButton 
+        phoneNumber="+905314720269"
+        message="Merhaba! Ürünleriniz hakkında bilgi almak istiyorum."
+      />
     </footer>
   );
 };

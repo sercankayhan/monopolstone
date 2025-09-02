@@ -9,6 +9,7 @@ import dotenv from 'dotenv';
 import connectDB from './config/database';
 import { errorHandler, notFound } from './middleware';
 import authRoutes from './routes/authRoutes';
+import contactRoutes from './routes/contactRoutes';
 
 dotenv.config();
 
@@ -63,6 +64,7 @@ app.get('/api/health', (req, res) => {
 });
 
 app.use('/api/auth', authRoutes);
+app.use('/api/contact', contactRoutes);
 
 app.use('*', notFound);
 app.use(errorHandler);

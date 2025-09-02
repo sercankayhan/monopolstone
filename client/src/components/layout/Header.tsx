@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '../ui';
+import { useTranslation } from 'react-i18next';
+import LanguageSwitcher from '../ui/LanguageSwitcher';
 
 interface HeaderProps {
   transparent?: boolean;
@@ -8,6 +10,7 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ transparent = false }) => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const { t } = useTranslation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
@@ -20,18 +23,31 @@ const Header: React.FC<HeaderProps> = ({ transparent = false }) => {
   }, []);
 
   const navigationItems = [
-    { name: 'Home', href: '#hero' },
-    { name: 'Products', href: '#products' },
-    { name: 'About', href: '#about' },
-    { name: 'Services', href: '#services' },
-    { name: 'Contact', href: '#contact' },
+    { name: t('nav.home'), href: '#hero' },
+    { name: t('nav.products'), href: '#products' },
+    { name: t('nav.about'), href: '#about' },
+    { name: t('nav.services'), href: '#services' },
+    { name: t('nav.contact'), href: '#contact' },
   ];
 
   const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
+    // Remove the # from href to get the section id
+    const sectionId = href.replace('#', '');
+    const element = document.getElementById(sectionId);
+    
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      // Close mobile menu first
       setIsMobileMenuOpen(false);
+      
+      // Small delay to ensure menu is closed before scrolling
+      setTimeout(() => {
+        element.scrollIntoView({ 
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }, 100);
+    } else {
+      console.log('Section not found:', sectionId);
     }
   };
 
@@ -58,16 +74,14 @@ const Header: React.FC<HeaderProps> = ({ transparent = false }) => {
             whileHover={{ scale: 1.05 }}
           >
             <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center">
-                <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M3 4a1 1 0 011-1h3a1 1 0 011 1v3a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 13a1 1 0 011-1h3a1 1 0 011 1v3a1 1 0 01-1 1H4a1 1 0 01-1-1v-3zM12 4a1 1 0 011-1h3a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1V4zM12 13a1 1 0 011-1h3a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-3z" clipRule="evenodd" />
-                </svg>
+              <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-transparent">
+                <img src="/logo.jpeg" alt="Monopol Stone" className="w-full h-full object-contain" />
               </div>
               <div>
-                <h1 className="text-xl font-bold text-primary font-heading">
-                  ArtificialStone
+                <h1 className={`text-xl font-bold font-heading ${transparent && !isScrolled ? 'text-white' : 'text-primary'}`}>
+                  {t('brand')}
                 </h1>
-                <p className="text-xs text-gray-500 -mt-1">Premium Quality</p>
+                <p className={`text-xs -mt-1 ${transparent && !isScrolled ? 'text-white/80' : 'text-gray-500'}`}>{t('premiumQuality')}</p>
               </div>
             </div>
           </motion.div>
@@ -100,12 +114,13 @@ const Header: React.FC<HeaderProps> = ({ transparent = false }) => {
 
           {/* Desktop CTA Button */}
           <div className="hidden lg:flex items-center space-x-4">
+            <LanguageSwitcher compact />
             <Button
               variant="outline"
               size="md"
               onClick={() => scrollToSection('#contact')}
             >
-              Get Quote
+              {t('cta.getQuote')}
             </Button>
           </div>
 
@@ -177,6 +192,19 @@ const Header: React.FC<HeaderProps> = ({ transparent = false }) => {
                   {item.name}
                 </motion.button>
               ))}
+              {/* Language Switcher */}
+              <motion.div
+                className="pt-4 border-t border-gray-200"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.4 }}
+              >
+                <div className="flex items-center justify-between">
+                  <span className="text-sm font-medium text-gray-600">{t('header.language')}</span>
+                  <LanguageSwitcher />
+                </div>
+              </motion.div>
+              
               <motion.div
                 className="pt-4 border-t border-gray-200"
                 initial={{ opacity: 0 }}
@@ -189,7 +217,7 @@ const Header: React.FC<HeaderProps> = ({ transparent = false }) => {
                   fullWidth
                   onClick={() => scrollToSection('#contact')}
                 >
-                  Get Quote
+                  {t('cta.getQuote')}
                 </Button>
               </motion.div>
             </div>

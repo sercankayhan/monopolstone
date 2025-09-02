@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Card, Button } from '../ui';
 
 interface Service {
@@ -16,119 +17,72 @@ interface Service {
 }
 
 const ServicesSection: React.FC = () => {
+  const { t } = useTranslation();
   const [activeService, setActiveService] = useState('design');
 
   const services: Service[] = [
     {
       id: 'design',
-      title: 'Custom Design Services',
-      description: 'Transform your vision into reality with our comprehensive design consultation and custom stone solutions.',
-      features: [
-        '3D Modeling & Visualization',
-        'Material Selection Guidance',
-        'Color Matching Services',
-        'Technical Drawings',
-        'Project Planning Support'
-      ],
+      title: t('services.design.title'),
+      description: t('services.design.description'),
+      features: t('services.design.features', { returnObjects: true }) as string[],
       icon: (
         <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
           <path fillRule="evenodd" d="M3 4a1 1 0 011-1h4a1 1 0 010 2H6.414l2.293 2.293a1 1 0 01-1.414 1.414L5 6.414V8a1 1 0 01-2 0V4zm9 1a1 1 0 010-2h4a1 1 0 011 1v4a1 1 0 01-2 0V6.414l-2.293 2.293a1 1 0 11-1.414-1.414L13.586 5H12zm-9 7a1 1 0 012 0v1.586l2.293-2.293a1 1 0 111.414 1.414L6.414 15H8a1 1 0 010 2H4a1 1 0 01-1-1v-4zm13-1a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 010-2h1.586l-2.293-2.293a1 1 0 111.414-1.414L15.586 13H14a1 1 0 01-1-1z" clipRule="evenodd" />
         </svg>
       ),
-      image: '/api/placeholder/500/300',
+      image: '/tasarimplanlama.jpeg',
       process: {
-        title: 'Design Process',
-        steps: [
-          'Initial consultation and requirement analysis',
-          '3D modeling and design visualization',
-          'Material selection and color matching',
-          'Technical specification development',
-          'Final design approval and documentation'
-        ]
+        title: t('services.design.processTitle'),
+        steps: t('services.design.processSteps', { returnObjects: true }) as string[]
       }
     },
     {
       id: 'installation',
-      title: 'Professional Installation',
-      description: 'Expert installation services ensuring perfect fit, finish, and long-lasting performance of your artificial stone surfaces.',
-      features: [
-        'Certified Installation Teams',
-        'Precision Cutting & Fitting',
-        'Surface Preparation',
-        'Quality Control Inspection',
-        'Post-Installation Cleanup'
-      ],
+      title: t('services.installation.title'),
+      description: t('services.installation.description'),
+      features: t('services.installation.features', { returnObjects: true }) as string[],
       icon: (
         <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
           <path fillRule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clipRule="evenodd" />
         </svg>
       ),
-      image: '/api/placeholder/500/300',
+      image: '/profesyonelkurulum.jpg',
       process: {
-        title: 'Installation Process',
-        steps: [
-          'Site survey and measurement verification',
-          'Surface preparation and substrate check',
-          'Precision cutting and edge finishing',
-          'Professional installation and alignment',
-          'Quality inspection and customer walkthrough'
-        ]
+        title: t('services.installation.processTitle'),
+        steps: t('services.installation.processSteps', { returnObjects: true }) as string[]
       }
     },
     {
       id: 'maintenance',
-      title: 'Maintenance & Care',
-      description: 'Comprehensive maintenance services and guidance to keep your artificial stone surfaces looking pristine for years.',
-      features: [
-        'Maintenance Consultation',
-        'Professional Cleaning Services',
-        'Repair & Restoration',
-        'Care Product Recommendations',
-        'Warranty Support'
-      ],
+      title: t('services.maintenance.title'),
+      description: t('services.maintenance.description'),
+      features: t('services.maintenance.features', { returnObjects: true }) as string[],
       icon: (
         <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
           <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
         </svg>
       ),
-      image: '/api/placeholder/500/300',
+      image: '/bakımkoruma.jpg',
       process: {
-        title: 'Maintenance Process',
-        steps: [
-          'Initial surface assessment and evaluation',
-          'Customized maintenance plan development',
-          'Professional cleaning and restoration',
-          'Care instructions and product recommendations',
-          'Ongoing support and warranty management'
-        ]
+        title: t('services.maintenance.processTitle'),
+        steps: t('services.maintenance.processSteps', { returnObjects: true }) as string[]
       }
     },
     {
       id: 'consultation',
-      title: 'Technical Consultation',
-      description: 'Expert guidance on material selection, application suitability, and project planning from our technical specialists.',
-      features: [
-        'Material Selection Advice',
-        'Application Suitability Analysis',
-        'Performance Specifications',
-        'Cost-Benefit Analysis',
-        'Project Timeline Planning'
-      ],
+      title: t('services.consultation.title'),
+      description: t('services.consultation.description'),
+      features: t('services.consultation.features', { returnObjects: true }) as string[],
       icon: (
         <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
           <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
         </svg>
       ),
-      image: '/api/placeholder/500/300',
+      image: '/uzmandanismanlik.jpg',
       process: {
-        title: 'Consultation Process',
-        steps: [
-          'Project requirements assessment',
-          'Technical feasibility analysis',
-          'Material and solution recommendations',
-          'Cost estimation and timeline planning',
-          'Implementation roadmap development'
-        ]
+        title: t('services.consultation.processTitle'),
+        steps: t('services.consultation.processSteps', { returnObjects: true }) as string[]
       }
     }
   ];
@@ -154,10 +108,10 @@ const ServicesSection: React.FC = () => {
           viewport={{ once: true }}
         >
           <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4 font-heading">
-            Our Services
+            {t('services.title')}
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Comprehensive solutions from design to installation and beyond. We support you at every step of your project journey.
+            {t('services.subtitle')}
           </p>
         </motion.div>
 
@@ -194,9 +148,9 @@ const ServicesSection: React.FC = () => {
             </div>
 
             <Card className="mt-6 p-6">
-              <h3 className="font-semibold text-primary mb-3">Need Help Choosing?</h3>
+              <h3 className="font-semibold text-primary mb-3">{t('services.needHelp')}</h3>
               <p className="text-gray-600 text-sm mb-4">
-                Our experts can help you select the right services for your project.
+                {t('services.needHelpText')}
               </p>
               <Button
                 variant="outline"
@@ -204,7 +158,7 @@ const ServicesSection: React.FC = () => {
                 fullWidth
                 onClick={scrollToContact}
               >
-                Get Consultation
+                {t('services.getConsultation')}
               </Button>
             </Card>
           </motion.div>
@@ -238,7 +192,7 @@ const ServicesSection: React.FC = () => {
 
                       <div className="mb-8">
                         <h4 className="text-lg font-semibold text-primary mb-4">
-                          What's Included:
+                          {t('services.whatIncluded')}
                         </h4>
                         <ul className="space-y-2">
                           {currentService.features.map((feature, index) => (
@@ -264,10 +218,10 @@ const ServicesSection: React.FC = () => {
                             </svg>
                           }
                         >
-                          Get Quote
+                          {t('services.getQuote')}
                         </Button>
                         <Button variant="outline">
-                          Learn More
+                          {t('services.learnMore')}
                         </Button>
                       </div>
                     </div>
@@ -325,6 +279,8 @@ const ServicesSection: React.FC = () => {
           </div>
         </div>
 
+
+
         {/* CTA Section */}
         <motion.div
           className="mt-16 text-center"
@@ -335,10 +291,10 @@ const ServicesSection: React.FC = () => {
         >
           <Card className="p-8 lg:p-12 bg-gradient-to-r from-primary to-primary/90 text-white">
             <h3 className="text-2xl lg:text-3xl font-bold mb-4 font-heading">
-              Ready to Start Your Project?
+              {t('services.readyToStart')}
             </h3>
             <p className="text-lg text-primary-100 mb-8 max-w-2xl mx-auto">
-              Let our experts help you bring your vision to life with premium artificial stone solutions and professional services.
+              {t('services.readyText')}
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <Button
@@ -351,19 +307,20 @@ const ServicesSection: React.FC = () => {
                   </svg>
                 }
               >
-                Get Free Consultation
+                {t('services.getFreeConsultation')}
               </Button>
               <Button
                 variant="ghost"
                 size="lg"
                 className="text-white border-white hover:bg-white/10"
+                onClick={() => window.open('tel:+905314720269', '_self')}
                 leftIcon={
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                   </svg>
                 }
               >
-                Call Now
+                {t('services.callNow')}
               </Button>
             </div>
           </Card>

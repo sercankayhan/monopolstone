@@ -77,14 +77,12 @@ const Login: React.FC = () => {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <div className="w-12 h-12 bg-gradient-to-br from-accent to-white/20 rounded-lg flex items-center justify-center">
-              <svg className="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M3 4a1 1 0 011-1h3a1 1 0 011 1v3a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 13a1 1 0 011-1h3a1 1 0 011 1v3a1 1 0 01-1 1H4a1 1 0 01-1-1v-3zM12 4a1 1 0 011-1h3a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1V4zM12 13a1 1 0 011-1h3a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-3z" clipRule="evenodd" />
-              </svg>
+            <div className="w-12 h-12 rounded-lg flex items-center justify-center bg-transparent">
+              <img src="/logo.jpeg" alt="Monopol Stone" className="w-full h-full object-contain" />
             </div>
             <div className="text-left">
               <h1 className="text-2xl font-bold text-white font-heading">
-                ArtificialStone
+                Monopol Stone
               </h1>
               <p className="text-accent text-sm">Admin Portal</p>
             </div>
@@ -211,7 +209,7 @@ const Login: React.FC = () => {
           transition={{ duration: 0.6, delay: 0.6 }}
         >
           <p className="text-white/60 text-sm">
-            © {new Date().getFullYear()} ArtificialStone. All rights reserved.
+            © {new Date().getFullYear()} Monopol Stone. All rights reserved.
           </p>
         </motion.div>
       </motion.div>
