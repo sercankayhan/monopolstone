@@ -13,8 +13,8 @@ const generateToken = (userId: string): string => {
   const jwtSecret: Secret = jwtSecretEnv as Secret;
 
   const options: SignOptions = {
-    expiresIn: (process.env.JWT_EXPIRES_IN || '7d') as unknown as number,
-  };
+  expiresIn: process.env.JWT_EXPIRES_IN || '7d',
+};
 
   return sign({ userId }, jwtSecret, options);
 };
