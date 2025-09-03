@@ -10,7 +10,6 @@ interface Product {
   category: string;
   image: string;
   images: string[];
-  description: string;
   specifications: {
     dimensions?: string;
     material?: string;
@@ -22,25 +21,31 @@ interface Product {
 }
 
 const ProductGallery: React.FC = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  const products: Product[] = [
+  const products: Product[] = useMemo(() => {
+    // Wait for i18n to be initialized to prevent translation issues
+    if (!i18n.isInitialized) {
+      return [];
+    }
+    
+    return [
     {
       id: 1,
       name: 'Mitra',
-      category: 'Kültür Taşı',
+      category: 'kultur-tasi',
       image: '/mitra-gölge.jpg',
       images: ['/mitra-gölge.jpg', '/mitra-sis.jpg', '/mitra-toprak.jpg'],
-      description: 'Zengin doku ve doğal görünüm sunan kültür taşı koleksiyonu.',
+
       specifications: {
-        dimensions: 'Değişken',
-        material: 'Kompozit Taş',
-        finish: 'Doğal Doku',
-        colors: ['Gölge', 'Sis', 'Toprak']
+        dimensions: t('products.mitra.specifications.dimensions', { defaultValue: 'Değişken' }),
+        material: t('products.mitra.specifications.material', { defaultValue: 'Kompozit Taş' }),
+        finish: t('products.mitra.specifications.finish', { defaultValue: 'Doğal Doku' }),
+        colors: t('products.mitra.specifications.colors', { returnObjects: true, defaultValue: ['Gölge', 'Sis', 'Toprak'] }) as string[]
       },
       tags: ['kultur-tasi', 'dekoratif', 'duvar'],
       featured: true
@@ -48,15 +53,15 @@ const ProductGallery: React.FC = () => {
     {
       id: 2,
       name: 'Luminar',
-      category: 'Kültür Taşı',
+      category: 'kultur-tasi',
       image: '/luminar-sis.jpg',
       images: ['/luminar-gölge.jpg', '/luminar-sis.jpg', '/luminar-toprak.jpg'],
-      description: 'Modern çizgilere sahip, iç ve dış mekânlarda uyumlu kültür taşı.',
+
       specifications: {
-        dimensions: 'Değişken',
-        material: 'Kompozit Taş',
-        finish: 'Mat',
-        colors: ['Gölge', 'Sis', 'Toprak']
+        dimensions: t('products.luminar.specifications.dimensions', { defaultValue: 'Değişken' }),
+        material: t('products.luminar.specifications.material', { defaultValue: 'Kompozit Taş' }),
+        finish: t('products.luminar.specifications.finish', { defaultValue: 'Mat' }),
+        colors: t('products.luminar.specifications.colors', { returnObjects: true, defaultValue: ['Gölge', 'Sis', 'Toprak'] }) as string[]
       },
       tags: ['kultur-tasi', 'modern', 'dis-cephe'],
       featured: true
@@ -64,15 +69,15 @@ const ProductGallery: React.FC = () => {
     {
       id: 3,
       name: 'Belezza',
-      category: 'Kültür Taşı',
+      category: 'kultur-tasi',
       image: '/belezza-yıldız.jpg',
       images: ['/belezza-günbatımı.jpg', '/belezza-yıldız.jpg'],
-      description: 'Zarif dokusuyla mekanlara sofistike bir hava katar.',
+
       specifications: {
-        dimensions: 'Değişken',
-        material: 'Kompozit Taş',
-        finish: 'Yarı Mat',
-        colors: ['Günbatımı', 'Yıldız']
+        dimensions: t('products.belezza.specifications.dimensions', { defaultValue: 'Değişken' }),
+        material: t('products.belezza.specifications.material', { defaultValue: 'Kompozit Taş' }),
+        finish: t('products.belezza.specifications.finish', { defaultValue: 'Yarı Mat' }),
+        colors: t('products.belezza.specifications.colors', { returnObjects: true, defaultValue: ['Günbatımı', 'Yıldız'] }) as string[]
       },
       tags: ['kultur-tasi', 'zarif', 'ic-mekan'],
       featured: false
@@ -80,15 +85,15 @@ const ProductGallery: React.FC = () => {
     {
       id: 4,
       name: 'Arvion',
-      category: 'Kültür Taşı',
+      category: 'kultur-tasi',
       image: '/arvion-toprak.jpg',
       images: ['/arvion-gölge.jpg', '/arvion-sis.jpg', '/arvion-toprak.jpg'],
-      description: 'Güçlü karaktere sahip doğal taş hissi.',
+
       specifications: {
-        dimensions: 'Değişken',
-        material: 'Kompozit Taş',
-        finish: 'Doğal Kırık',
-        colors: ['Gölge', 'Sis', 'Toprak']
+        dimensions: t('products.arvion.specifications.dimensions', { defaultValue: 'Değişken' }),
+        material: t('products.arvion.specifications.material', { defaultValue: 'Kompozit Taş' }),
+        finish: t('products.arvion.specifications.finish', { defaultValue: 'Doğal Kırık' }),
+        colors: t('products.arvion.specifications.colors', { returnObjects: true, defaultValue: ['Gölge', 'Sis', 'Toprak'] }) as string[]
       },
       tags: ['kultur-tasi', 'rustik', 'duvar-kaplama'],
       featured: false
@@ -96,15 +101,15 @@ const ProductGallery: React.FC = () => {
     {
       id: 5,
       name: 'Tivoli',
-      category: 'Kültür Taşı',
+      category: 'kultur-tasi',
       image: '/tivoli-antrasit.jpg',
       images: ['/tivoli-gölge.jpg', '/tivoli-sis.jpg', '/tivoli-toprak.jpg', '/tivoli-antrasit.jpg'],
-      description: 'Zamanı aşan çizgilerle modern ve doğal bir görünüm.',
+
       specifications: {
-        dimensions: 'Değişken',
-        material: 'Kompozit Taş',
-        finish: 'Doğal Doku',
-        colors: ['Gölge', 'Sis', 'Toprak', 'Antrasit']
+        dimensions: t('products.tivoli.specifications.dimensions', { defaultValue: 'Değişken' }),
+        material: t('products.tivoli.specifications.material', { defaultValue: 'Kompozit Taş' }),
+        finish: t('products.tivoli.specifications.finish', { defaultValue: 'Doğal Doku' }),
+        colors: t('products.tivoli.specifications.colors', { returnObjects: true, defaultValue: ['Gölge', 'Sis', 'Toprak', 'Antrasit'] }) as string[]
       },
       tags: ['kultur-tasi', 'modern', 'mimari'],
       featured: true
@@ -112,7 +117,7 @@ const ProductGallery: React.FC = () => {
     {
       id: 6,
       name: 'Leon',
-      category: 'Kültür Tuğlası',
+      category: 'kultur-tuglasi',
       image: '/leon-inci.jpg',
       images: [
         '/leon-inci.jpg',
@@ -122,12 +127,12 @@ const ProductGallery: React.FC = () => {
         '/leon-lav.jpg',
         '/leon-mix.jpg'
       ],
-      description: 'Doğal tuğla dokusunu yansıtan, sıcak ve samimi görünüm.',
+
       specifications: {
-        dimensions: 'Değişken',
-        material: 'Kompozit Tuğla',
-        finish: 'Mat',
-        colors: ['İnci', 'Çakıl', 'Çöl', 'Köz', 'Lav', 'Mix']
+        dimensions: t('products.leon.specifications.dimensions', { defaultValue: 'Değişken' }),
+        material: t('products.leon.specifications.material', { defaultValue: 'Kompozit Tuğla' }),
+        finish: t('products.leon.specifications.finish', { defaultValue: 'Mat' }),
+        colors: t('products.leon.specifications.colors', { returnObjects: true, defaultValue: ['İnci', 'Çakıl', 'Çöl', 'Köz', 'Lav', 'Mix'] }) as string[]
       },
       tags: ['kultur-tuglasi', 'rustik', 'ic-dis-mekan'],
       featured: false
@@ -135,7 +140,7 @@ const ProductGallery: React.FC = () => {
     {
       id: 7,
       name: 'Leila',
-      category: 'Kültür Tuğlası',
+      category: 'kultur-tuglasi',
       image: '/leila-lav.jpg',
       images: [
         '/leila-inci.jpg',
@@ -145,12 +150,12 @@ const ProductGallery: React.FC = () => {
         '/leila-lav.jpg',
         '/leila-mix.jpg'
       ],
-      description: 'Zarif tuğla dokusuyla modern ve klasik çizgileri buluşturur.',
+
       specifications: {
-        dimensions: 'Değişken',
-        material: 'Kompozit Tuğla',
-        finish: 'Yarı Mat',
-        colors: ['İnci', 'Çakıl', 'Çöl', 'Köz', 'Lav', 'Mix']
+        dimensions: t('products.leila.specifications.dimensions', { defaultValue: 'Değişken' }),
+        material: t('products.leila.specifications.material', { defaultValue: 'Kompozit Tuğla' }),
+        finish: t('products.leila.specifications.finish', { defaultValue: 'Yarı Mat' }),
+        colors: t('products.leila.specifications.colors', { returnObjects: true, defaultValue: ['İnci', 'Çakıl', 'Çöl', 'Köz', 'Lav', 'Mix'] }) as string[]
       },
       tags: ['kultur-tuglasi', 'zarif', 'dekoratif'],
       featured: false
@@ -158,7 +163,7 @@ const ProductGallery: React.FC = () => {
     {
       id: 8,
       name: 'Lora',
-      category: 'Kültür Tuğlası',
+      category: 'kultur-tuglasi',
       image: '/lora-köz.jpg',
       images: [
         '/lora-inci.jpg',
@@ -168,22 +173,26 @@ const ProductGallery: React.FC = () => {
         '/lora-lav.jpg',
         '/lora-mix.jpg'
       ],
-      description: 'Minimal hatlarla doğal tuğla görünümü.',
+
       specifications: {
-        dimensions: 'Değişken',
-        material: 'Kompozit Tuğla',
-        finish: 'Mat',
-        colors: ['İnci', 'Çakıl', 'Çöl', 'Köz', 'Lav', 'Mix']
+        dimensions: t('products.lora.specifications.dimensions', { defaultValue: 'Değişken' }),
+        material: t('products.lora.specifications.material', { defaultValue: 'Kompozit Tuğla' }),
+        finish: t('products.lora.specifications.finish', { defaultValue: 'Mat' }),
+        colors: t('products.lora.specifications.colors', { returnObjects: true, defaultValue: ['İnci', 'Çakıl', 'Çöl', 'Köz', 'Lav', 'Mix'] }) as string[]
       },
       tags: ['kultur-tuglasi', 'minimal', 'duvar-kaplama'],
       featured: false
     }
-  ];
+    ];
+  }, [t, i18n.isInitialized, i18n.language]);
 
-  // Debug: Log products array
+  // Debug: Log products array and language
   console.log('Products array loaded:', products.length, 'products');
+  console.log('Current language:', i18n.language, 'resolved:', i18n.resolvedLanguage);
+  console.log('Test direct translation:', t('products.mitra.description'));
+  console.log('i18n exists?', !!t, 'resources?', !!i18n.store?.data);
 
-  const categories = ['All', 'Kültür Taşı', 'Kültür Tuğlası'];
+  const categories = useMemo(() => ['All', 'kultur-tasi', 'kultur-tuglasi'], []);
 
   const filteredProducts = useMemo(() => {
     console.log('Filtering products:', { selectedCategory, searchTerm, totalProducts: products.length });
@@ -260,6 +269,19 @@ const ProductGallery: React.FC = () => {
     }
   };
 
+  // Show loading state while i18n is initializing
+  if (!i18n.isInitialized) {
+    return (
+      <section id="products" className="py-16 lg:py-24 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-center items-center min-h-[400px]">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section id="products" className="py-16 lg:py-24 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -324,7 +346,7 @@ const ProductGallery: React.FC = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                {category === 'All' ? t('gallery.all') : category}
+                {category === 'All' ? t('gallery.all') : t(`gallery.categories.${category}`)}
               </motion.button>
             ))}
           </div>
@@ -373,9 +395,9 @@ const ProductGallery: React.FC = () => {
                   </div>
                   
                   <div>
-                    <span className="text-sm text-accent font-medium">{product.category}</span>
+                    <span className="text-sm text-accent font-medium">{t(`gallery.categories.${product.category}`)}</span>
                     <h3 className="text-lg font-semibold text-primary mt-1 mb-2">{product.name}</h3>
-                    <p className="text-gray-600 text-sm line-clamp-2 mb-3">{product.description}</p>
+                    <p className="text-gray-600 text-sm line-clamp-2 mb-3">{t(`products.${product.name.toLowerCase()}.description`)}</p>
                     
                     <div className="flex flex-wrap gap-1">
                       {product.tags.slice(0, 3).map((tag) => (
@@ -383,7 +405,7 @@ const ProductGallery: React.FC = () => {
                           key={tag}
                           className="px-2 py-1 bg-gray-100 text-gray-600 rounded-full text-xs"
                         >
-                          {tag}
+                          {t(`tags.${tag}`)}
                         </span>
                       ))}
                     </div>
@@ -472,10 +494,10 @@ const ProductGallery: React.FC = () => {
 
             {/* Product Details */}
             <div>
-              <span className="text-accent font-medium text-sm">{selectedProduct.category}</span>
+              <span className="text-accent font-medium text-sm">{t(`gallery.categories.${selectedProduct.category}`)}</span>
               <h2 className="text-2xl font-bold text-primary mt-2 mb-4">{selectedProduct.name}</h2>
               
-              <p className="text-gray-600 mb-6">{selectedProduct.description}</p>
+              <p className="text-gray-600 mb-6">{t(`products.${selectedProduct.name.toLowerCase()}.description`)}</p>
               
               {/* Specifications */}
               <div className="mb-6">
@@ -520,7 +542,7 @@ const ProductGallery: React.FC = () => {
                 <div className="flex flex-wrap gap-2">
                   {selectedProduct.tags.map((tag) => (
                     <span key={tag} className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm">
-                      #{tag}
+                      #{t(`tags.${tag}`)}
                     </span>
                   ))}
                 </div>

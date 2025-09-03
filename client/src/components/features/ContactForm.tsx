@@ -161,11 +161,11 @@ const ContactForm: React.FC = () => {
                     <h3 className="text-xl font-bold text-primary font-heading">
                       Monopol Stone
                     </h3>
-                    <p className="text-accent text-sm">Premium Quality</p>
+                    <p className="text-accent text-sm">{t('premiumQuality')}</p>
                   </div>
                 </div>
                 <p className="text-gray-600">
-                  Mekanlarınızı premium taş çözümlerimizle dönüştürün.
+                  {t('contact.labels.description')}
                 </p>
               </Card>
 
@@ -182,7 +182,7 @@ const ContactForm: React.FC = () => {
                     </svg>
                   </div>
                   <div>
-                    <h4 className="font-semibold text-primary mb-1">Adres</h4>
+                    <h4 className="font-semibold text-primary mb-1">{t('contact.labels.address')}</h4>
                     <p className="text-gray-600 text-sm leading-relaxed">
                       {contactInfo.address}
                     </p>
@@ -200,7 +200,7 @@ const ContactForm: React.FC = () => {
                     </svg>
                   </div>
                   <div>
-                    <h4 className="font-semibold text-primary mb-1">Telefon</h4>
+                    <h4 className="font-semibold text-primary mb-1">{t('contact.labels.phone')}</h4>
                     <p className="text-gray-600 text-sm">
                       <a href={`tel:${contactInfo.phone}`} className="hover:text-accent transition-colors">
                         {contactInfo.phone}
@@ -221,7 +221,7 @@ const ContactForm: React.FC = () => {
                     </svg>
                   </div>
                   <div>
-                    <h4 className="font-semibold text-primary mb-1">E-posta</h4>
+                    <h4 className="font-semibold text-primary mb-1">{t('contact.labels.email')}</h4>
                     <p className="text-gray-600 text-sm">
                       <a href={`mailto:${contactInfo.email}`} className="hover:text-accent transition-colors">
                         {contactInfo.email}
@@ -241,7 +241,7 @@ const ContactForm: React.FC = () => {
                     </svg>
                   </div>
                   <div>
-                    <h4 className="font-semibold text-primary mb-1">Çalışma Saatleri</h4>
+                    <h4 className="font-semibold text-primary mb-1">{t('contact.labels.workingHours')}</h4>
                     <p className="text-gray-600 text-sm leading-relaxed whitespace-pre-line">
                       {contactInfo.hours}
                     </p>
@@ -272,7 +272,7 @@ const ContactForm: React.FC = () => {
                       <svg className="w-5 h-5 text-success" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                       </svg>
-                      <span className="text-success font-medium">Thank you! Your message has been sent successfully.</span>
+                      <span className="text-success font-medium">{t('contact.form.success')}</span>
                     </div>
                   </motion.div>
                 )}
@@ -287,7 +287,7 @@ const ContactForm: React.FC = () => {
                       <svg className="w-5 h-5 text-error" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
                       </svg>
-                      <span className="text-error font-medium">Sorry, there was an error sending your message. Please try again.</span>
+                      <span className="text-error font-medium">{t('contact.form.error')}</span>
                     </div>
                   </motion.div>
                 )}
@@ -295,7 +295,7 @@ const ContactForm: React.FC = () => {
                 {/* Form Fields */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <Input
-                    label="Ad Soyad"
+                    label={t('contact.form.name')}
                     required
                     value={formData.name}
                     onChange={(e) => handleInputChange('name', e.target.value)}
@@ -308,7 +308,7 @@ const ContactForm: React.FC = () => {
                   />
 
                   <Input
-                    label="E-posta Adresi"
+                    label={t('contact.form.email')}
                     type="email"
                     required
                     value={formData.email}
@@ -325,7 +325,7 @@ const ContactForm: React.FC = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <Input
-                    label="Telefon Numarası"
+                    label={t('contact.form.phone')}
                     type="tel"
                     value={formData.phone}
                     onChange={(e) => handleInputChange('phone', e.target.value)}
@@ -338,7 +338,7 @@ const ContactForm: React.FC = () => {
                   />
 
                   <Input
-                    label="Şirket (İsteğe Bağlı)"
+                    label={t('contact.form.company')}
                     value={formData.company}
                     onChange={(e) => handleInputChange('company', e.target.value)}
                     leftIcon={
@@ -350,7 +350,7 @@ const ContactForm: React.FC = () => {
                 </div>
 
                 <Input
-                                      label="Konu"
+                  label={t('contact.form.subject')}
                   required
                   value={formData.subject}
                   onChange={(e) => handleInputChange('subject', e.target.value)}
@@ -364,7 +364,7 @@ const ContactForm: React.FC = () => {
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Mesaj <span className="text-error">*</span>
+                    {t('contact.form.message')} <span className="text-error">*</span>
                   </label>
                   <textarea
                     rows={6}
@@ -375,7 +375,7 @@ const ContactForm: React.FC = () => {
                         ? 'border-error focus:border-error focus:ring-error/20'
                         : 'border-gray-300 focus:border-primary focus:ring-primary/20'
                     }`}
-                    placeholder="Proje gereksinimleriniz hakkında bize bilgi verin..."
+                    placeholder={t('contact.form.messagePlaceholder')}
                   />
                   {errors.message && (
                     <p className="mt-1 text-sm text-error flex items-center gap-1">
@@ -396,7 +396,7 @@ const ContactForm: React.FC = () => {
                     fullWidth
                     disabled={isSubmitting}
                   >
-                    {isSubmitting ? 'Gönderiliyor...' : 'Mesaj Gönder'}
+                    {isSubmitting ? t('contact.form.submitting') : t('contact.form.submit')}
                   </Button>
                 </div>
               </form>
@@ -408,7 +408,7 @@ const ContactForm: React.FC = () => {
       {/* WhatsApp Button */}
       <WhatsAppButton 
         phoneNumber="+905314720269"
-        message="Merhaba! Ürünleriniz hakkında bilgi almak istiyorum."
+        message={t('contact.whatsapp.message')}
       />
     </section>
   );

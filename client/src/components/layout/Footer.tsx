@@ -29,10 +29,10 @@ const Footer: React.FC = () => {
   ];
 
   const services = [
-    { name: 'Özel Tasarım', href: '#' },
-    { name: 'Kurulum', href: '#' },
-    { name: 'Bakım', href: '#' },
-    { name: 'Danışmanlık', href: '#' }
+    { name: t('footer.servicesList.design'), href: '#' },
+    { name: t('footer.servicesList.installation'), href: '#' },
+    { name: t('footer.servicesList.maintenance'), href: '#' },
+    { name: t('footer.servicesList.consultation'), href: '#' }
   ];
 
   const scrollToSection = (href: string) => {
@@ -192,7 +192,7 @@ const Footer: React.FC = () => {
       {/* WhatsApp Button */}
       <WhatsAppButton 
         phoneNumber="+905314720269"
-        message="Merhaba! Ürünleriniz hakkında bilgi almak istiyorum."
+        message={t('contact.whatsapp.message')}
       />
     </footer>
   );

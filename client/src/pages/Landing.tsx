@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { Header, Footer } from '../components/layout';
 import { HeroSection, ProductGallery, ContactForm } from '../components/features';
 import AboutSection from '../components/features/AboutSection';
@@ -6,6 +7,7 @@ import ServicesSection from '../components/features/ServicesSection';
 import { WhatsAppButton } from '../components/ui';
 
 const Landing: React.FC = () => {
+  const { t } = useTranslation();
   return (
     <div className="min-h-screen bg-white">
       <Header transparent />
@@ -33,7 +35,7 @@ const Landing: React.FC = () => {
       {/* WhatsApp Button */}
       <WhatsAppButton 
         phoneNumber="+905314720269"
-        message="Merhaba! Ürünleriniz hakkında bilgi almak istiyorum."
+        message={t('contact.whatsapp.message')}
       />
     </div>
   );

@@ -139,7 +139,7 @@ const AboutSection: React.FC = () => {
             <div className="relative">
               <img
                 src="/tasarimplanlama.jpeg"
-                alt="Tasarım ve Planlama"
+                alt={t('about.imageAlt')}
                 className="rounded-lg shadow-xl w-full h-auto"
               />
               

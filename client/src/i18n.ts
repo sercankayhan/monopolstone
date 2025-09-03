@@ -97,7 +97,8 @@ const resources = {
             title: 'Sustainability',
             description: 'We are committed to environmentally friendly production practices.'
           }
-        }
+        },
+        imageAlt: 'Design and Planning'
       },
       contact: {
         title: 'Get In Touch',
@@ -106,11 +107,21 @@ const resources = {
           name: 'Full Name',
           email: 'Email Address',
           phone: 'Phone Number',
+          company: 'Company (Optional)',
           subject: 'Subject',
           message: 'Message',
+          messagePlaceholder: 'Tell us about your project requirements...',
           submit: 'Send Message',
-          success: 'Message sent successfully!',
-          error: 'Error sending message. Please try again.'
+          submitting: 'Sending...',
+          success: 'Thank you! Your message has been sent successfully.',
+          error: 'Sorry, there was an error sending your message. Please try again.'
+        },
+        labels: {
+          address: 'Address',
+          phone: 'Phone',
+          email: 'Email',
+          workingHours: 'Working Hours',
+          description: 'Transform your spaces with our premium stone solutions.'
         },
         info: {
           address: 'İzzettin, Candemir Sk No: 6/33, 34540 Çatalca/İstanbul',
@@ -224,6 +235,10 @@ const resources = {
         viewDetails: 'View Details',
         emptyTitle: 'No products found',
         emptySubtitle: 'Try adjusting your search or filter criteria',
+        categories: {
+          'kultur-tasi': 'Culture Stone',
+          'kultur-tuglasi': 'Culture Brick'
+        },
         specs: {
           title: 'Specifications',
           dimensions: 'Dimensions:',
@@ -234,6 +249,95 @@ const resources = {
         tags: 'Tags',
         requestQuote: 'Request Quote',
         downloadSpecs: 'Download Specs'
+      },
+      products: {
+        mitra: {
+          description: 'Premium culture stone collection with rich texture and natural appearance.',
+          specifications: {
+            dimensions: 'Variable',
+            material: 'Composite Stone',
+            finish: 'Natural Texture',
+            colors: ['Shadow', 'Mist', 'Earth']
+          }
+        },
+        luminar: {
+          description: 'Modern line culture stone, compatible with indoor and outdoor spaces.',
+          specifications: {
+            dimensions: 'Variable',
+            material: 'Composite Stone',
+            finish: 'Matte',
+            colors: ['Shadow', 'Mist', 'Earth']
+          }
+        },
+        belezza: {
+          description: 'Adds a sophisticated atmosphere to spaces with its elegant texture.',
+          specifications: {
+            dimensions: 'Variable',
+            material: 'Composite Stone',
+            finish: 'Semi-Matte',
+            colors: ['Sunset', 'Star']
+          }
+        },
+        arvion: {
+          description: 'Natural stone feeling with strong character.',
+          specifications: {
+            dimensions: 'Variable',
+            material: 'Composite Stone',
+            finish: 'Natural Break',
+            colors: ['Shadow', 'Mist', 'Earth']
+          }
+        },
+        tivoli: {
+          description: 'Modern and natural appearance with timeless lines.',
+          specifications: {
+            dimensions: 'Variable',
+            material: 'Composite Stone',
+            finish: 'Natural Texture',
+            colors: ['Shadow', 'Mist', 'Earth', 'Anthracite']
+          }
+        },
+        leon: {
+          description: 'Warm and friendly appearance reflecting natural brick texture.',
+          specifications: {
+            dimensions: 'Variable',
+            material: 'Composite Brick',
+            finish: 'Matte',
+            colors: ['Pearl', 'Pebble', 'Desert', 'Ember', 'Lava', 'Mix']
+          }
+        },
+        leila: {
+          description: 'Brings together modern and classic lines with elegant brick texture.',
+          specifications: {
+            dimensions: 'Variable',
+            material: 'Composite Brick',
+            finish: 'Semi-Matte',
+            colors: ['Pearl', 'Pebble', 'Desert', 'Ember', 'Lava', 'Mix']
+          }
+        },
+        lora: {
+          description: 'Natural brick appearance with minimal lines.',
+          specifications: {
+            dimensions: 'Variable',
+            material: 'Composite Brick',
+            finish: 'Matte',
+            colors: ['Pearl', 'Pebble', 'Desert', 'Ember', 'Lava', 'Mix']
+          }
+        }
+      },
+      tags: {
+        'kultur-tasi': 'Culture Stone',
+        'kultur-tuglasi': 'Culture Brick', 
+        'dekoratif': 'Decorative',
+        'duvar': 'Wall',
+        'modern': 'Modern',
+        'dis-cephe': 'Exterior Facade',
+        'zarif': 'Elegant',
+        'ic-mekan': 'Interior',
+        'rustik': 'Rustic',
+        'duvar-kaplama': 'Wall Cladding',
+        'mimari': 'Architectural',
+        'ic-dis-mekan': 'Indoor & Outdoor',
+        'minimal': 'Minimal'
       },
       footer: {
         description: 'Premium stone solutions for modern spaces. Quality, innovation, and customer satisfaction guaranteed.',
@@ -246,7 +350,13 @@ const resources = {
         privacy: 'Privacy Policy',
         terms: 'Terms of Service',
         copyright: '© 2024 Monopol Stone. All rights reserved.',
-        social: 'Follow Us'
+        social: 'Follow Us',
+        servicesList: {
+          design: 'Custom Design',
+          installation: 'Installation',
+          maintenance: 'Maintenance',
+          consultation: 'Consultation'
+        }
       },
       header: {
         language: 'Language',
@@ -354,7 +464,8 @@ const resources = {
             title: 'Sürdürülebilirlik',
             description: 'Çevre dostu üretim uygulamalarına bağlıyız.'
           }
-        }
+        },
+        imageAlt: 'Tasarım ve Planlama'
       },
       contact: {
         title: 'İletişime Geçin',
@@ -363,11 +474,21 @@ const resources = {
           name: 'Ad Soyad',
           email: 'E-posta Adresi',
           phone: 'Telefon Numarası',
+          company: 'Şirket (İsteğe Bağlı)',
           subject: 'Konu',
           message: 'Mesaj',
+          messagePlaceholder: 'Proje gereksinimleriniz hakkında bize bilgi verin...',
           submit: 'Mesaj Gönder',
-          success: 'Mesaj başarıyla gönderildi!',
-          error: 'Mesaj gönderilirken hata oluştu. Lütfen tekrar deneyin.'
+          submitting: 'Gönderiliyor...',
+          success: 'Teşekkürler! Mesajınız başarıyla gönderildi.',
+          error: 'Üzgünüz, mesajınız gönderilirken bir hata oluştu. Lütfen tekrar deneyin.'
+        },
+        labels: {
+          address: 'Adres',
+          phone: 'Telefon',
+          email: 'E-posta',
+          workingHours: 'Çalışma Saatleri',
+          description: 'Mekanlarınızı premium taş çözümlerimizle dönüştürün.'
         },
         info: {
           address: 'İzzettin, Candemir Sk No: 6/33, 34540 Çatalca/İstanbul',
@@ -481,6 +602,10 @@ const resources = {
         viewDetails: 'Detayları Gör',
         emptyTitle: 'Ürün bulunamadı',
         emptySubtitle: 'Arama veya filtre kriterlerinizi değiştirin',
+        categories: {
+          'kultur-tasi': 'Kültür Taşı',
+          'kultur-tuglasi': 'Kültür Tuğlası'
+        },
         specs: {
           title: 'Teknik Özellikler',
           dimensions: 'Ölçüler:',
@@ -491,6 +616,95 @@ const resources = {
         tags: 'Etiketler',
         requestQuote: 'Teklif İste',
         downloadSpecs: 'Teknik Döküman'
+      },
+      products: {
+        mitra: {
+          description: 'Zengin doku ve doğal görünüm sunan kültür taşı koleksiyonu.',
+          specifications: {
+            dimensions: 'Değişken',
+            material: 'Kompozit Taş',
+            finish: 'Doğal Doku',
+            colors: ['Gölge', 'Sis', 'Toprak']
+          }
+        },
+        luminar: {
+          description: 'Modern çizgilere sahip, iç ve dış mekânlarda uyumlu kültür taşı.',
+          specifications: {
+            dimensions: 'Değişken',
+            material: 'Kompozit Taş',
+            finish: 'Mat',
+            colors: ['Gölge', 'Sis', 'Toprak']
+          }
+        },
+        belezza: {
+          description: 'Zarif dokusuyla mekanlara sofistike bir hava katar.',
+          specifications: {
+            dimensions: 'Değişken',
+            material: 'Kompozit Taş',
+            finish: 'Yarı Mat',
+            colors: ['Günbatımı', 'Yıldız']
+          }
+        },
+        arvion: {
+          description: 'Güçlü karaktere sahip doğal taş hissi.',
+          specifications: {
+            dimensions: 'Değişken',
+            material: 'Kompozit Taş',
+            finish: 'Doğal Kırık',
+            colors: ['Gölge', 'Sis', 'Toprak']
+          }
+        },
+        tivoli: {
+          description: 'Zamanı aşan çizgilerle modern ve doğal bir görünüm.',
+          specifications: {
+            dimensions: 'Değişken',
+            material: 'Kompozit Taş',
+            finish: 'Doğal Doku',
+            colors: ['Gölge', 'Sis', 'Toprak', 'Antrasit']
+          }
+        },
+        leon: {
+          description: 'Doğal tuğla dokusunu yansıtan, sıcak ve samimi görünüm.',
+          specifications: {
+            dimensions: 'Değişken',
+            material: 'Kompozit Tuğla',
+            finish: 'Mat',
+            colors: ['İnci', 'Çakıl', 'Çöl', 'Köz', 'Lav', 'Mix']
+          }
+        },
+        leila: {
+          description: 'Zarif tuğla dokusuyla modern ve klasik çizgileri buluşturur.',
+          specifications: {
+            dimensions: 'Değişken',
+            material: 'Kompozit Tuğla',
+            finish: 'Yarı Mat',
+            colors: ['İnci', 'Çakıl', 'Çöl', 'Köz', 'Lav', 'Mix']
+          }
+        },
+        lora: {
+          description: 'Minimal hatlarla doğal tuğla görünümü.',
+          specifications: {
+            dimensions: 'Değişken',
+            material: 'Kompozit Tuğla',
+            finish: 'Mat',
+            colors: ['İnci', 'Çakıl', 'Çöl', 'Köz', 'Lav', 'Mix']
+          }
+        }
+      },
+      tags: {
+        'kultur-tasi': 'Kültür Taşı',
+        'kultur-tuglasi': 'Kültür Tuğlası',
+        'dekoratif': 'Dekoratif', 
+        'duvar': 'Duvar',
+        'modern': 'Modern',
+        'dis-cephe': 'Dış Cephe',
+        'zarif': 'Zarif',
+        'ic-mekan': 'İç Mekan',
+        'rustik': 'Rustik',
+        'duvar-kaplama': 'Duvar Kaplama',
+        'mimari': 'Mimari',
+        'ic-dis-mekan': 'İç & Dış Mekan',
+        'minimal': 'Minimal'
       },
       footer: {
         description: 'Modern mekanlar için premium taş çözümleri. Kalite, yenilik ve müşteri memnuniyeti garantili.',
@@ -503,7 +717,13 @@ const resources = {
         privacy: 'Gizlilik Politikası',
         terms: 'Kullanım Şartları',
         copyright: '© 2024 Monopol Stone. Tüm hakları saklıdır.',
-        social: 'Bizi Takip Edin'
+        social: 'Bizi Takip Edin',
+        servicesList: {
+          design: 'Özel Tasarım',
+          installation: 'Kurulum',
+          maintenance: 'Bakım',
+          consultation: 'Danışmanlık'
+        }
       },
       header: {
         language: 'Dil',
@@ -521,7 +741,7 @@ i18n
   .init({
     resources,
     lng: 'tr',
-    fallbackLng: 'tr',
+    fallbackLng: 'en',
     supportedLngs: ['en', 'tr'],
     interpolation: { escapeValue: false },
     detection: {
