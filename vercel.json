@@ -1,14 +1,7 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "client/package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "build"
-      }
-    }
-  ],
+  "buildCommand": "cd client && npm ci && npm run build",
+  "outputDirectory": "client/build",
+  "installCommand": "npm ci",
   "routes": [
     {
       "src": "/(.*)",
@@ -16,8 +9,6 @@
     }
   ],
   "env": {
-    "NODE_VERSION": "18",
-    "NPM_VERSION": "9",
     "CI": "false"
   }
 }
